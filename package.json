@@ -38,9 +38,13 @@
       ],
       "strict": [
         2,
-        "global"
+        "function"
       ]
     }
+  },
+  "jshintConfig": {
+    "jquery": true,
+    "strict": "func"
   },
   "dependencies": {
     "babel-core": "^6.3.21"

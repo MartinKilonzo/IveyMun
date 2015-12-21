@@ -1,3 +1,4 @@
+(function () {
 'use strict';
 console.log('\'Allo \'Allo!');
 
@@ -7,3 +8,4 @@ $(function() {
 	$('#content').load('partials/content.html');
 	$('#footer').load('partials/footer.html');
 });
+}());
