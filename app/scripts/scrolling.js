@@ -1,16 +1,14 @@
+/*global TweenMax TimelineMax ScrollMagic*/
 (function () {
 	'use strict';
 
-	// Controller information
-	console.info('Scrolling online!');
-	console.info('----- PLUGIN INFO -----');
-	console.info('TweenMax (GSAP) Version:', TweenMax.version);
-	console.info('ScrollMagic Version:', ScrollMagic.version);
-	console.info('ScrollMagic (GSAP) Version:', ScrollMagic.version);
-	console.info('----- PLUGIN INFO -----\n');
+	console.info('Pages Loaded');
 
 	// init controller
 	var sceneController = new ScrollMagic.Controller();
+
+	// SCENE 1 //
+
 	// var redContainerScene = new ScrollMagic.Scene({
 	// 	triggerElement: '#red-scene',
 	// 	duration: 100

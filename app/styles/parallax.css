@@ -7,38 +7,138 @@ html, body {
 
 /* Hide the scrollabr */
 ::-webkit-scrollbar {
-    width: 0px;  /* remove scrollbar space */
-    background: transparent;  /* optional: just make scrollbar invisible */
+	width: 0px;  /* remove scrollbar space */
+	background: transparent;  /* optional: just make scrollbar invisible */
 }
 /* optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
-    background: #FF0000;
+	background: #FF0000;
 }
+
+.header {
+	/* This needs to be on top of the parallax view */
+	position: relative;
+	top: 0;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+}
+
+.greyscale {
+	-moz-filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+	-o-filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+	-webkit-filter: grayscale(100%);
+	filter: gray;
+	filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+	
+}
+
+/* Intro */
+
+#Dark_Logo_wrapper {
+	height: 100vh;
+	width: 100%;
+}
+
+#Dark_Logo_bg {
+	position: absolute;
+	top: 0;
+	height: 100vh;
+	width: 100%;
+	background-color: black;
+}
+
+#Dark_Logo {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+
+	text-align: center;
+
+	/*padding-top: 2%;*/
+	/*padding-bottom: 2%;*/
+
+	background-color: rgba(255,255,255,0.2);
+}
+
+path {
+	fill-opacity: 0;
+	stroke: #929497;
+	stroke-width: 0.4;
+	stroke-dasharray: 100px;
+	stroke-dashoffset: 100px;
+	animation-name: draw;
+	animation-duration: 5s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: 1; 
+	animation-timing-function: linear;
+}
+
+#Dark_Logo_Ivey_Text {
+	animation-name: fillText;
+	animation-duration: 5s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: 1; 
+	animation-timing-function: linear;
+}
+
+
+@keyframes draw {
+	to {
+		stroke-dashoffset: 0;
+		stroke-opacity: 0;
+		fill-opacity: 1;	
+	}
+}
+@keyframes fillText {
+	to {
+		stroke-dashoffset: 0;
+		stroke-opacity: 0;
+		fill-opacity: 1;
+		fill: #DDD;
+	}
+}
+
 
 /* Parallax Styles */
 
 .parallax-wrapper {
-	position: realtive;
-	top: 0;
+	perspective: 1px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	perspective: 1px;
+}
+
+.parallax-group {
+	position: relative;
+	height: 100vh;
+	transform-style: preserve-3d;
+	margin-top: 100vh;
 }
 
 .parallax {
 	position: absolute;
-	height: 100vh;
-	width: 100%;
+	top: 0;
+	right: 0;
+	bottom: 0;
 	left: 0;
+	height: 100vh;
+	min-width: 100%;
 }
 
 .parallax-foreground {
-	z-index: 3;
+	transform: translateZ(3px);
 }
 
 .parallax-middleground {
-	z-index: 0;
+	transform: translateZ(0);
 }
 
 .parallax-background {
-	z-index: -3;
+	transform: translateZ(-3px);
 }
 
 .parallax-text {
@@ -53,8 +153,45 @@ html, body {
 }
 
 /* Scene Styles */
+
+#scene1 {
+	margin-top: 0;
+	top: -30px;
+	position: relative
+}
+
+#scene2 {
+	margin-top: 200vh;
+	position: relative;
+}
+
+#scene3 {
+	margin-top: 200vh;
+	position: relative;
+}
+
 #scene1 .parallax-background {
-	background-image: url("../images/example_parallax_bg1.png");
+	height: 100vh;
+}
+
+
+
+#scene1 .parallax-middleground {
+	top: 100vh;
+	/*background-image: url("../images/UN Plaza.png");*/
+	background-repeat: no-repeat;
+	background-size: 100%; 
+	height: 400vh;
+}
+
+
+#scene2 .parallax-background {
+	background-image: url("../images/example_parallax_bg2.png");
+	background-color: red;
+}
+
+#scene3 .parallax-background {
+	background-image: url("../images/example_parallax_bg3.png");
 	background-color: red;
 }
 
