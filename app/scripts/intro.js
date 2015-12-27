@@ -9,8 +9,8 @@
 	.insert(TweenMax.to([Dark_Logo_bg], 0.75, {
 		delay: 6,
 		height: '-=66%',
-		ease: Linear.easeIn
-	}))
-;
+		ease: Linear.easeIn,
+		force3D:true
+	}));
 	animateScene1.play();
 }());

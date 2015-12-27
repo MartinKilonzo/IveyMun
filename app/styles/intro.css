@@ -1,0 +1,87 @@
+/* Intro */
+
+#Dark_Logo_wrapper {
+	height: 100vh;
+	width: 100%;
+}
+
+#Dark_Logo_bg {
+	position: absolute;
+	top: 0;
+	height: 100vh;
+	width: 100%;
+
+	background-color: black;
+}
+
+#Dark_Logo {
+	position: relative;
+	top: 0;
+	height: 100%;
+	width: 100%;
+
+	text-align: center;
+
+	background-color: rgba(255,255,255,0.2);
+}
+
+path {
+	fill-opacity: 0;
+	stroke: #929497;
+	stroke-width: 0.4;
+	stroke-dasharray: 100px;
+	stroke-dashoffset: 100px;
+	animation-name: draw;
+	animation-duration: 5s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: 1; 
+	animation-timing-function: linear;
+
+	-moz-animation-name: draw;
+	-moz-animation-duration: 5s;
+	-moz-animation-fill-mode: forwards;
+	-moz-animation-iteration-count: 1; 
+	-moz-animation-timing-function: linear;
+
+	-webkit-animation-name: draw;
+	-webkit-animation-duration: 5s;
+	-webkit-animation-fill-mode: forwards;
+	-webkit-animation-iteration-count: 1; 
+	-webkit-animation-timing-function: linear;
+}
+
+#Dark_Logo_Ivey_Text {
+	animation-name: fillText;
+	animation-duration: 5s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: 1; 
+	animation-timing-function: linear;
+
+	-moz-animation-name: fillText;
+	-moz-animation-duration: 5s;
+	-moz-animation-fill-mode: forwards;
+	-moz-animation-iteration-count: 1; 
+	-moz-animation-timing-function: linear;
+
+	-webkit-animation-name: fillText;
+	-webkit-animation-duration: 5s;
+	-webkit-animation-fill-mode: forwards;
+	-webkit-animation-iteration-count: 1; 
+	-webkit-animation-timing-function: linear;
+}
+
+@keyframes draw {
+	to {
+		stroke-dashoffset: 0;
+		stroke-opacity: 0;
+		fill-opacity: 1;	
+	}
+}
+@keyframes fillText {
+	to {
+		stroke-dashoffset: 0;
+		stroke-opacity: 0;
+		fill-opacity: 1;
+		fill: #DDD;
+	}
+}
