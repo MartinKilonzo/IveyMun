@@ -18,9 +18,11 @@
 	text-align: center;
 
 	background-color: rgba(255,255,255,0.2);
+	z-index: 100;
 }
 
-path {
+/* Animations for the Intro Scene */
+.draw {
 	fill-opacity: 0;
 	stroke: #929497;
 	stroke-width: 0.4;
@@ -69,7 +71,7 @@ path {
 	to {
 		stroke-dashoffset: 0;
 		stroke-opacity: 0;
-		fill-opacity: 1;	
+		fill-opacity: 1;
 	}
 }
 @keyframes fillText {

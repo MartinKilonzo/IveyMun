@@ -1,6 +1,7 @@
-/*global TweenMax TimelineMax ScrollMagic Linear*/
+/*global*/
 (function () {
 	'use strict';
 
 	console.info('Header Loaded');
+
 }());

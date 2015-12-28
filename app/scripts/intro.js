@@ -1,9 +1,9 @@
-/*global TweenMax TimelineMax ScrollMagic Linear*/
+/*global TweenMax TimelineMax Power2*/
 (function () {
 	'use strict';
 
 	console.info('Intro Loaded');
-	$('#content').load('partials/test.html');
+	$('#content').load('partials/content.html');
 
 	//TODO: LoCK SCROL POSITION FOR ANIMATION DURATION
 	// lock scroll position, but retain settings for later
@@ -18,6 +18,14 @@
 	html.css('overflow', 'hidden');
 	window.scrollTo(scrollPosition[0], scrollPosition[1]);
 
+	/*
+	 * Keep the header centered on the intro background by keeping its height
+	 * the same as the background's
+	 */
+	var resizeHeader = function () {
+		$('#header').css('height', $('#Dark_Logo_bg').height());
+	};
+
 	var resumeScroll = function () {
 		// un-lock scroll position
 		scrollPosition = html.data('scroll-position');
@@ -27,30 +35,21 @@
 		resizeHeader();
 	};
 
-	/*
-	 * Keep the header centered on the intro background by keeping its height 
-	 * the same as the background's
-	 */
-	var resizeHeader = function () {
-		$('#header').css('height', $('#Dark_Logo_bg').height());
-		console.log('fired!');
-	};
-
 	$(window).on('resize', resizeHeader);
 
 	var animateScene1 = new TimelineMax();
 	animateScene1
-	// .insert(TweenMax.to(Dark_Logo_bg, 0.75, {
-	// 	delay: 6,
-	// 	height: '-=66%',
-	// 	ease: Linear.easeIn,
-	// 	force3D: true,
-	// 	onComplete: resumeScroll
-	// }));
-	.insert(TweenMax.to(Dark_Logo_bg, 0, {
+	.insert(TweenMax.to('#Dark_Logo_bg', 2, {
+		delay: 6,
 		height: '-=66%',
-		ease: Linear.easeIn,
+		ease: Power2.easeOut,
 		force3D: true,
 		onComplete: resumeScroll
+	}))
+	.insert(TweenMax.to('#header', 2, {
+		delay: 9,
+		opacity: 1,
+		ease: Power2.easeOut
 	}));
+	animateScene1.progress(0);
 }());

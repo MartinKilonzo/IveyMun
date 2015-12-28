@@ -1,0 +1,16 @@
+.wrapper {
+	height: 100vh;
+	width: 100vw;
+}
+
+#conferenceWrapper {
+	background-color: grey;
+}
+
+#committeeWrapper {
+	background-color: blue;
+}
+
+#aboutWrapper {
+	background-color: green;
+}

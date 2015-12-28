@@ -3,11 +3,24 @@
 		<button type="button" class="btn">Home</button>
 	</div>
 	<div class="col-xs-2 navHeader">
-		<button type="button" class="btn">Conference</button>
+		<button id="conference" type="button" class="btn dropdown-toggle" data-toggle="committeeList" aria-haspopup="true" aria-expanded="true">Conference</button>
+		<ul class="dropdown-menu" aria-labelledby="committeeList">
+		<li><a href="#">Committee</a></li>
+			<li><a href="#">Registration</a></li>
+			<li><a href="#">MUN Resources</a></li>
+		</ul>
 	</div>
 
-	<div class="col-xs-2 navHeader col-xs-offset-2">
-		<button type="button" class="btn">Committees</button>
+	<div class="col-xs-2 col-xs-offset-2 navHeader dropdown">
+		<button id="committees" type="button" class="btn dropdown-toggle" data-toggle="committeeList" aria-haspopup="true" aria-expanded="true">Committees</button>
+		<ul class="dropdown-menu" aria-labelledby="committeeList">
+			<li><a href="#">Committee</a></li>
+			<li><a href="#">Committee</a></li>
+			<li><a href="#">Committee</a></li>
+			<li><a href="#">Committee</a></li>
+			<li><a href="#">Committee</a></li>
+			<li><a href="#">MUN Resources</a></li>
+		</ul>
 	</div>
 	<div class="col-xs-2 navHeader">
 		<button type="button" class="btn">About Us</button>

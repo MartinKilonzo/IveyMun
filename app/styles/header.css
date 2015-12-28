@@ -1,18 +1,16 @@
 /* Custom page header */
-#simulation {
-	height: 1000vh;
-	width: 100vw;
-}
+
 .header {
 	position: absolute;
-	top: 0;	
+	opacity: 0;
+	top: 0;
 	border-bottom: 1px solid #e5e5e5;
 	margin-bottom: 0;
 }
 
-.row {
+.header > .row {
 	position: relative;
-	top: 45%;
+	top: 46%;
 }
 
 .navHeader {
@@ -28,7 +26,7 @@
 	font-family: 'aleo-light';
 	letter-spacing: .15vw;
 	font-size: 16px;
-	line-height:1.0vw;
+	line-height: 1.0vw;
 
 	color: #DDD;
 	background-color: transparent;
@@ -38,11 +36,6 @@
 .navHeader > button:hover {
 	color: white;
 }
-
-@media screen and (min-width: 581px) {
-	.navHeader > button {
-
-	}
+.navHeader > button:focus {
+	color: white;
 }
-
-

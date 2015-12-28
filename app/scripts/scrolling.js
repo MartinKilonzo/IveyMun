@@ -1,4 +1,4 @@
-/*global TweenMax TimelineMax ScrollMagic*/
+/*global*/
 (function () {
 	'use strict';
 
