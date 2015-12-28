@@ -2,7 +2,7 @@
 (function () {
 	'use strict';
 
-	console.info('Pages Loaded');
+	console.info('Scrolling online!');
 
 	// init controller
 	var sceneController = new ScrollMagic.Controller();
