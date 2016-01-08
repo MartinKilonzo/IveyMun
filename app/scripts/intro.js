@@ -51,5 +51,5 @@
 		opacity: 1,
 		ease: Power2.easeOut
 	}));
-	animateScene1.progress(0);
+	animateScene1.progress(100);
 }());
