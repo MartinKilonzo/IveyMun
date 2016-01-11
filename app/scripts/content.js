@@ -1,9 +1,9 @@
-/*global*/
-var nextSlide;
+/*global TweenMax ScrollMagic*/
 (function () {
 	'use strict';
 
 	console.info('Scrolling online!');
+	$('#intro').load('partials/intro.html');
 
 	var slides = $('.slide').toArray();
 
@@ -15,7 +15,7 @@ var nextSlide;
 	var delay = 2;
 	var duration = 1;
 
-	nextSlide = function () {
+	var nextSlide = function () {
 		var slideId = slides[currentSlide].id;
 		var slide = $('#'+slideId);
 
@@ -25,7 +25,7 @@ var nextSlide;
 			// left: '-100vw',
 			opacity: 0,
 		})
-		.eventCallback('onComplete', function () { 
+		.eventCallback('onComplete', function () {
 			//move all slides up one z index
 			for (var i = 0; i < slides.length; i++) {
 				var s = $('#'+slides[i].id);
@@ -47,7 +47,7 @@ var nextSlide;
 
 	// Stopeed when in view
 	// Need arrow buttons on the sides to navigate
-	var slideLoop = setInterval(nextSlide, 5000);
+	//var slideLoop = setInterval(nextSlide, 5000);
 
 	// init controller
 	var sceneController = new ScrollMagic.Controller();

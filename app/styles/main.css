@@ -1,5 +1,26 @@
 @import url('../fonts/aleo-regular-webfont.woff2');
 
+.content {
+  position: absolute;
+  top: 0;
+  /*height: 100vh;*/
+
+  /*overflow: hidden;*/
+}
+
+.wrapper {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+
+  top: 0;
+  left: 0;
+}
+
+.navbar {
+  
+}
+
 .browserupgrade {
   margin: 0.2em 0;
   background: #ccc;

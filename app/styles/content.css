@@ -1,6 +1,5 @@
-.wrapper {
-	height: 100vh;
-	width: 100vw;
+#intro {
+  background: red;
 }
 
 #conferenceWrapper {
@@ -8,8 +7,6 @@
 }
 
 #committeeWrapper {
-	position: relative;
-	background-color: blue;
 	overflow: hidden;
 }
 
@@ -26,6 +23,74 @@
 	min-height: 100vh;
 	width: 100vw;
 
+}
+
+.slide-content {
+	position: relative;
+	height: 75%;
+	top: 0;
+	background: turquoise;
+}
+
+.slide-hidden {
+  position: absolute;
+  top: 100vh;
+}
+
+.slide-hidden > .wrapper {
+  position: absolute;
+}
+
+.slide-downbar {
+	position: absolute;
+	top: 75%;
+	bottom: 0;
+	height: 25%;
+	width: 100%;
+
+	margin-top: 2px;
+	background-color: white;
+}
+
+.slide-buttons-left {
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 50%;
+	background: rgba(0,0,0,0.55);
+}
+
+.slide-buttons-right {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 50%;
+	left: 50%;
+
+	margin-left: 2px;
+	background: rgba(0,0,0,0.55);
+}
+
+.committee-title {
+	position: relative;
+	top: 15%;
+	left: 0;
+	height: 20%;
+	width: 50%;
+	background-color: rgba(0,0,0,0.15);
+	background-opacity:;
+}
+
+.committee-content {
+	position: relative;
+	bottom: 0;
+	left: 60%;
+	width: 40%;
+}
+
+#committee0 {
+	background-color: salmon;
 }
 
 #committee1 {

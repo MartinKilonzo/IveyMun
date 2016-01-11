@@ -4,8 +4,8 @@
 
 // Building the pages components
 $(function() {
-	$('#intro').load('partials/intro.html');
-	$('#header').load('partials/header.html');
+	$('#content').load('partials/content.html');
+	$('#navbar').load('partials/navbar.html');
 	$('#footer').load('partials/footer.html');
 	$('html').niceScroll();
 

@@ -3,7 +3,7 @@
 	'use strict';
 
 	console.info('Intro Loaded');
-	$('#content').load('partials/content.html');
+	
 
 	//TODO: LoCK SCROL POSITION FOR ANIMATION DURATION
 	// lock scroll position, but retain settings for later
@@ -41,7 +41,7 @@
 	animateScene1
 	.insert(TweenMax.to('#Dark_Logo_bg', 2, {
 		delay: 6,
-		height: '-=66%',
+		height: '75vh',
 		ease: Power2.easeOut,
 		force3D: true,
 		onComplete: resumeScroll
