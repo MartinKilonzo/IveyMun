@@ -1,54 +1,92 @@
 /*global TweenMax ScrollMagic*/
+var nextSlide;
 (function () {
 	'use strict';
 
 	console.info('Scrolling online!');
 	$('#intro').load('partials/intro.html');
 
-	var slides = $('.slide').toArray();
+	var content = [];
+	var placeholderImg = 'http://www.aviatorcameragear.com/wp-content/uploads/2012/07/placeholder_2.jpg';
 
-	for (var i = slides.length - 1; i >= 0; i--) {
-		$('#'+slides[i].id).css('zIndex', slides.length - i - 1);
-	}
+	var slides = $('.slide');
 
-	var currentSlide = 0;
-	var delay = 2;
-	var duration = 1;
-
-	var nextSlide = function () {
-		var slideId = slides[currentSlide].id;
-		var slide = $('#'+slideId);
-
-		TweenMax
-		.to(slides[currentSlide++], duration, {
-			delay: delay,
-			// left: '-100vw',
-			opacity: 0,
-		})
-		.eventCallback('onComplete', function () {
-			//move all slides up one z index
-			for (var i = 0; i < slides.length; i++) {
-				var s = $('#'+slides[i].id);
-
-				var newZIndex = parseInt(s.css('zIndex')) + 1;
-				s.css('zIndex', newZIndex);
-			}
-			var zIndex = slide.css('zIndex');
-
-			slide.css({
-				left: 0,
-				opacity: 1,
-				zIndex: zIndex - slides.length
+	slides.each(function (index, slide) {
+		content[index] = ([	'/images/slidebgs/slide'+index+'bg1.jpg',
+			'/images/slidebgs/slide'+index+'bg2.jpg'
+			]);
+		$(slide).prepend('<div class="slideBg"></div>');
+		$(slide).prepend('<div class="slideBg"></div>');
+		$(slide).children('.slideBg').each(function (bgIndex, bg) {
+			$(bg).css({
+				background: 'url('+content[index][bgIndex]+')',
+				backgroundSize: 'cover',
+				backgroundRepeat: 'no-repeat',
+				backgroundPosition: 'center, center'
 			});
 		});
-		//Alternatively, using currentSlide%slide.length as the index would work and would reduce the need for this check
-		if (currentSlide === slides.length) { currentSlide = 0; }
+	});
+
+	console.log(slides, content);
+
+	var slideImg = -1;
+	var delay = 2;
+	var duration = 1.5;
+
+	nextSlide = function (currentSlide) {
+		if (currentSlide > -1) {
+
+			var slide = $(slides).get(currentSlide);
+			var bgSlides = $(slide).children('.slideBg');
+			
+			if (slideImg < 0 ) { slideImg = bgSlides.length - 1; }
+
+			var bg = $(bgSlides).get(slideImg);
+
+			TweenMax
+			.to($(bgSlides).get(slideImg--), duration, {
+				delay: delay,
+				// left: '-100vw',
+				opacity: 0
+			});
+			TweenMax
+			.to($(bgSlides).get(slideImg), duration, {
+				delay: delay,
+				// left: '-100vw',
+				opacity: 1
+			});
+		}
 	};
 
-	// Stopeed when in view
-	// Need arrow buttons on the sides to navigate
-	//var slideLoop = setInterval(nextSlide, 5000);
+	// nextSlide = function (currentSlide) {
+	// 	if(currentSlide > -1) {
+	// 		var length = $(slides.get(currentSlide)).children('.slideBg').length;
+	// 		//Alternatively, using slideImg%slide.length as the index would work and would reduce the need for this check
+	// 		if (slideImg % length === -1) { slideImg = length - 1; }
+	// 		var bgSlides = $('#slideWrapper'+currentSlide).children('.slideBg');
+	// 		var slide = bgSlides.get(slideImg--);
+	// 		console.debug($(slide));
+	// 		TweenMax
+	// 		.to($(slide), duration, {
+	// 			delay: delay,
+	// 		// left: '-100vw',
+	// 		opacity: 0,
+	// 		zIndex: $(slide).css('zIindex') - 1
+	// 	})
+	// 	.eventCallback('onComplete', function () {
+	// 		//move all content up one z index
+	// 		bgSlides.each(function (index, slide) {
+	// 			$(slide).css('zIndex', parseInt($(slide).css('zIndex')) + 1);
+	// 		});
 
+	// 		$(slide).css({
+	// 			left: 0,
+	// 			opacity: 1,
+	// 			zIndex: $(slide).css('zIndex') - bgSlides.length
+	// 		});
+	// 	}, [slideImg]);
+	// 	}
+	// };
 	// init controller
 	var sceneController = new ScrollMagic.Controller();
 

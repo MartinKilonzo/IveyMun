@@ -25,11 +25,15 @@
 
 }
 
+.slide.wrapper {
+	background-color: white;
+}
+
 .slide-content {
 	position: relative;
 	height: 75%;
+	min-width: 100%;
 	top: 0;
-	background: turquoise;
 }
 
 .slide-hidden {
@@ -50,6 +54,8 @@
 
 	margin-top: 2px;
 	background-color: white;
+
+	z-index: 30;
 }
 
 .slide-buttons-left {
@@ -72,6 +78,14 @@
 	background: rgba(0,0,0,0.55);
 }
 
+.slideBg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
 .committee-title {
 	position: relative;
 	top: 15%;
@@ -89,7 +103,7 @@
 	width: 40%;
 }
 
-#committee0 {
+/*#committee0 {
 	background-color: salmon;
 }
 
@@ -119,4 +133,4 @@
 
 #committee7 {
 	background-color: violet;
-}
+}*/

@@ -27,52 +27,56 @@ var changeSlide;
 	});
 
 	var busy = false;
-	var current = 0;
+	var currentSlide = -1;
+	var imagesIntervalId;
 
 	changeSlide = function (index) {
 		if (busy) { return; }
 
 		var slide;
-		if (index > current) {
+		if (index > currentSlide) {
 			// Set the busy flag
 			busy = true;
 			slide = $('#slideWrapper'+index);
 			var buttons = slide.children('.slide-downbar');
 
-			// Slide the current slide up
+			// Slide the currentSlide slide up
 			TweenMax.to(slide, 0.60, {
 				top: '-100vh',
 				ease: Power1.easeOut
 			})
 			.eventCallback('onComplete', function () {
 				// Move each previous, unmoved slide up
-				for (var i = current; i < index; i++) {
+				for (var i = currentSlide; i < index; i++) {
 					$('#slideWrapper'+i).css('top', '-100vh');
 				}
-				// Update current and unset the busy flag
-				current = index;
+				// Update currentSlide and unset the busy flag
+				currentSlide = index;
+				//CLEAR NEXT SLIDE
+				if (imagesIntervalId) { clearInterval(imagesIntervalId); }
+				imagesIntervalId = setInterval(function () { nextSlide(currentSlide); }, 8000);
 				busy = false;
 			});
 		}
 
-		else if (index < current) {
+		else if (index < currentSlide) {
 			// Set the busy flag
 			busy = true;
-			slide = $('#slideWrapper'+current);
+			slide = $('#slideWrapper'+currentSlide);
 
 			// Move each previous, moved slide down
-				for (var i = index + 1; i < current; i++) {
+				for (var i = index + 1; i < currentSlide; i++) {
 					$('#slideWrapper'+i).css('top', '0vh');
 				}
 
-			// Slide the current slide down
+			// Slide the currentSlide slide down
 			TweenMax.to(slide, 0.6, {
 				top: '0vh',
 				ease: Power1.easeOut
 			})
 			.eventCallback('onComplete', function () {
-				// Update current and unset the busy flag
-				current = index;
+				// Update currentSlide and unset the busy flag
+				currentSlide = index;
 				busy = false;
 			});
 		}
