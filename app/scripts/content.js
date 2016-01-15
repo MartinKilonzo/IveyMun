@@ -7,16 +7,21 @@ var nextSlide;
 	$('#intro').load('partials/intro.html');
 
 	var content = [];
-	var placeholderImg = 'http://www.aviatorcameragear.com/wp-content/uploads/2012/07/placeholder_2.jpg';
+	var numBgs = [1,2,2,2,2,2];
 
 	var slides = $('.slide');
 
 	slides.each(function (index, slide) {
-		content[index] = ([	'/images/slidebgs/slide'+index+'bg1.jpg',
-			'/images/slidebgs/slide'+index+'bg2.jpg'
-			]);
-		$(slide).prepend('<div class="slideBg"></div>');
-		$(slide).prepend('<div class="slideBg"></div>');
+		content[index] = [];
+		for (var bg = 0; bg < numBgs[index]; bg++) {
+			//Load the image
+			content[index][bg] = '/images/slidebgs/slide'+index+'bg'+bg+'.jpg';
+			// Add the image div
+			$(slide).prepend('<div class="slideBg"></div>');
+			// Add a button
+			// TODO: Complete the link for the button
+			$(slide).children('.slide-downbar').prepend('<div class="slide-button" style="width: '+1/numBgs[index]+'%, left: '+bg/numBgs[index]+'%"></div>');
+		}
 		$(slide).children('.slideBg').each(function (bgIndex, bg) {
 			$(bg).css({
 				background: 'url('+content[index][bgIndex]+')',
@@ -31,17 +36,15 @@ var nextSlide;
 
 	var slideImg = -1;
 	var delay = 2;
-	var duration = 1.5;
+	var duration = 1;
 
 	nextSlide = function (currentSlide) {
-		if (currentSlide > -1) {
+		if (currentSlide > -1 && $(slides.get(currentSlide)).children('.slideBg').length > 1) {
 
 			var slide = $(slides).get(currentSlide);
 			var bgSlides = $(slide).children('.slideBg');
 			
 			if (slideImg < 0 ) { slideImg = bgSlides.length - 1; }
-
-			var bg = $(bgSlides).get(slideImg);
 
 			TweenMax
 			.to($(bgSlides).get(slideImg--), duration, {

@@ -37,13 +37,13 @@
 /* TODO: SPACE OUT LINKS ON NEW LINE WITH PADDING */
 .nav-button:active {
 	padding-top: 16px;
-	color: grey;
+	color: white;
 }
 
 /* TODO: REMOVE UNDERLINE, KEEP BOLD */
 .nav-button:hover {
 	padding-top: 16px;
-	color: grey;
+	color: white;
 	font-weight: bold;
 	text-decoration: none;
 }

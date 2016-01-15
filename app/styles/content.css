@@ -53,17 +53,23 @@
 	width: 100%;
 
 	margin-top: 2px;
-	background-color: white;
-
 	z-index: 30;
 }
 
+.slide-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+}
+
 .slide-buttons-left {
+	position: absolute;
 	top: 0;
 	left: 0;
 	height: 100%;
 	width: 50%;
-	background: rgba(0,0,0,0.55);
+	background: rgba(0,0,0,0.2);
 }
 
 .slide-buttons-right {
@@ -75,7 +81,7 @@
 	left: 50%;
 
 	margin-left: 2px;
-	background: rgba(0,0,0,0.55);
+	background: rgba(0,0,0,0.2);
 }
 
 .slideBg {
