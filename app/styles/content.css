@@ -1,5 +1,4 @@
 #intro {
-  background: red;
 }
 
 #conferenceWrapper {
@@ -31,9 +30,23 @@
 
 .slide-content {
 	position: relative;
-	height: 75%;
+	height: 100%;
 	min-width: 100%;
 	top: 0;
+}
+
+.bgWrapper {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.contentWrapper {
+	position: absolute;
+	top: 0;
+	height: 75%;
+	width: 100%;
 }
 
 .slide-hidden {
@@ -53,7 +66,6 @@
 	width: 100%;
 
 	margin-top: 2px;
-	z-index: 30;
 }
 
 .slide-button {
@@ -61,6 +73,8 @@
 	top: 0;
 	right: 0;
 	height: 100%;
+	margin-left: 3px;
+	background: rgba(0,0,0,0.55);
 }
 
 .slide-buttons-left {

@@ -1,5 +1,5 @@
 /*global TweenMax ScrollMagic*/
-var nextSlide;
+var nextSlide, slides;
 (function () {
 	'use strict';
 
@@ -12,17 +12,25 @@ var nextSlide;
 	var slides = $('.slide');
 
 	slides.each(function (index, slide) {
+		var bgWrapper = $(slide).find('.bgWrapper');
 		content[index] = [];
 		for (var bg = 0; bg < numBgs[index]; bg++) {
 			//Load the image
 			content[index][bg] = '/images/slidebgs/slide'+index+'bg'+bg+'.jpg';
 			// Add the image div
-			$(slide).prepend('<div class="slideBg"></div>');
+			bgWrapper.prepend('<div class="slideBg"></div>');
 			// Add a button
 			// TODO: Complete the link for the button
-			$(slide).children('.slide-downbar').prepend('<div class="slide-button" style="width: '+1/numBgs[index]+'%, left: '+bg/numBgs[index]+'%"></div>');
+			var marginLeft;
+			if (bg === 0) { marginLeft = 0; }
+			else {marginLeft = '2px'; }
+			$('<div class="slide-button"></div>').css({
+				left: 100*bg/numBgs[index]+'vw',
+				width: 100/numBgs[index]+'vw',
+				marginLeft: marginLeft
+			}).appendTo($(slide).children('.slide-downbar'));
 		}
-		$(slide).children('.slideBg').each(function (bgIndex, bg) {
+		$(slide).find('.slideBg').each(function (bgIndex, bg) {
 			$(bg).css({
 				background: 'url('+content[index][bgIndex]+')',
 				backgroundSize: 'cover',
@@ -39,10 +47,10 @@ var nextSlide;
 	var duration = 1;
 
 	nextSlide = function (currentSlide) {
-		if (currentSlide > -1 && $(slides.get(currentSlide)).children('.slideBg').length > 1) {
+		var slide = $(slides.get(currentSlide));
+		if (currentSlide > -1 && $(slide).find('.slideBg').length > 1) {
 
-			var slide = $(slides).get(currentSlide);
-			var bgSlides = $(slide).children('.slideBg');
+			var bgSlides = $(slide).find('.slideBg');
 			
 			if (slideImg < 0 ) { slideImg = bgSlides.length - 1; }
 
