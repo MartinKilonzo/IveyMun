@@ -18,26 +18,23 @@ var nextSlide, slides;
 			//Load the image
 			content[index][bg] = '/images/slidebgs/slide'+index+'bg'+bg+'.jpg';
 			// Add the image div
-			bgWrapper.prepend('<div class="slideBg"></div>');
+			$('<div class="slideBg"></div>').css({
+				background: 'url('+content[index][bg]+')',
+				backgroundSize: 'cover',
+				backgroundRepeat: 'no-repeat',
+				backgroundPosition: 'center, center'
+			}).prependTo(bgWrapper);
 			// Add a button
 			// TODO: Complete the link for the button
 			var marginLeft;
 			if (bg === 0) { marginLeft = 0; }
-			else {marginLeft = '2px'; }
+			else { marginLeft = '2px'; }
 			$('<div class="slide-button"></div>').css({
 				left: 100*bg/numBgs[index]+'vw',
 				width: 100/numBgs[index]+'vw',
 				marginLeft: marginLeft
 			}).appendTo($(slide).children('.slide-downbar'));
 		}
-		$(slide).find('.slideBg').each(function (bgIndex, bg) {
-			$(bg).css({
-				background: 'url('+content[index][bgIndex]+')',
-				backgroundSize: 'cover',
-				backgroundRepeat: 'no-repeat',
-				backgroundPosition: 'center, center'
-			});
-		});
 	});
 
 	console.log(slides, content);
@@ -63,7 +60,7 @@ var nextSlide, slides;
 			TweenMax
 			.to($(bgSlides).get(slideImg), duration, {
 				delay: delay,
-				// left: '-100vw',
+				// left: '0',
 				opacity: 1
 			});
 		}

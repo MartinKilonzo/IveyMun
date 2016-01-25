@@ -2,8 +2,7 @@
 (function () {
 	'use strict';
 
-	console.info('Intro Loaded');
-	
+	console.info('Intro Loaded');	
 
 	//TODO: LoCK SCROL POSITION FOR ANIMATION DURATION
 	// lock scroll position, but retain settings for later
@@ -46,8 +45,13 @@
 		force3D: true,
 		onComplete: resumeScroll
 	}))
-	.insert(TweenMax.to('#header', 2, {
-		delay: 9,
+	.insert(TweenMax.to('#navbar', 2, {
+		delay: 7,
+		opacity: 1,
+		ease: Power2.easeOut
+	}))
+	.insert(TweenMax.to('#introButtons', 2, {
+		delay: 7,
 		opacity: 1,
 		ease: Power2.easeOut
 	}));
