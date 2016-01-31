@@ -56,4 +56,5 @@
 		ease: Power2.easeOut
 	}));
 	animateScene1.progress(100);
+	// TODO: ADD SCROLL INDICATOR TO BOTTOM OF PAGE, AND ON SIDE FOR NAV BAR (BARS WITH CARRET ARROW)
 }());
