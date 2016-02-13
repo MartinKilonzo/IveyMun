@@ -1,13 +1,16 @@
+/* Nav Classes for Vertical Nav */
 .nav {
 	position: absolute;
 	z-index: 100;
-	right: 0px;
+	top: 0;
+	right: 0;
 	height: 100vh;
 	width: 0;
 	padding-left: 20px;
 	/*background-color: rgba(250,250,250,0.4);*/
 
 	justify-content: center;
+	font-family: 'Quicksand', sans-serif;
 }
 
 .nav .nav-collapsed {
@@ -20,13 +23,13 @@
 	/*padding-right: 20px;*/
 	height: 100%;
 	width: 100%;
-	background-color: rgba(11,225,204,0.30);
+	background-color: rgba(0,168,150,0.30);
 }
 
 .nav-wrapper > .label-wrapper {
 	position: relative;
 	vertical-align: baseline;
-	top: 25%;
+	top: 33%;
 	/*padding-right: 20px;*/
 }
 
@@ -57,7 +60,7 @@ a.nav-button.active {
 	padding-bottom: 16px;
 	font-size: 1.2em;
 	font-weight: bold;
-	/*background-color: rgba(11,225,204,0.25);*/
+	/*background-color: rgba(0,168,150,0.25);*/
 }
 
 /* TODO: REMOVE UNDERLINE, KEEP BOLD */
@@ -104,4 +107,3 @@ a.nav-label > .nav-label {
 a.nav-button.active >.label-bar {
 	background-color: rgba(8,161,146,0.4);
 }
-

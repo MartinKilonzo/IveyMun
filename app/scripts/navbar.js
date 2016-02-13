@@ -1,4 +1,4 @@
-/*global ScrollMagic, TimelineMax, TweenMax, Power1*/
+/*global ScrollMagic, TimelineMax, TweenMax, Back, Power1*/
 var changeSlide;
 (function () {
 	'use strict';
@@ -6,6 +6,7 @@ var changeSlide;
 	console.info('Navbar Loaded');
 	var navTimeLine = new TimelineMax();
 	var slides = $('.slide');
+	slides.length = slides.length || 7;
 	var isOpen = false;
 
 	$('.nav').hover(function() {
@@ -15,6 +16,7 @@ var changeSlide;
 			navTimeLine.add(
 				TweenMax.to(this, 0.5, {
 					width: '25%',
+					maxWidth: '240px',
 					paddingLeft: '0'
 				}).eventCallback('onComplete', function() {
 					TweenMax.to([labels, labelBars], 0.2, {
@@ -49,22 +51,27 @@ var changeSlide;
 		}
 	});
 
-
-	$('a.nav-button').on('click', function(event) {
-		event.preventDefault();
-		$('a.nav-button').removeClass('active');
-		$(this).addClass('active');
-	});
+	// $('a.nav-button').on('click', function(event) {
+	// 	console.debug(event.data.value);
+	// 	event.preventDefault();
+	// 	$('a.nav-button').removeClass('active');
+	// 	$(this).addClass('active');
+	// });
 
 	var busy = false;
 	var currentSlide = -1;
 	var imagesIntervalId;
 
 	changeSlide = function (index) {
-		if (busy || index < -1 || index === slides.length) { return; }
+		if (busy || (index < -1) || (index === slides.length)) { return; }
 
 		var slide;
 		if (index > currentSlide) {
+
+			// Update the navbar to show the current page
+			$('a.nav-button').removeClass('active');
+			$($('a.nav-button').get(index+1)).addClass('active');
+
 			// Set the busy flag
 			busy = true;
 			slide = $('#slideWrapper'+index);
@@ -73,13 +80,13 @@ var changeSlide;
 			var topbar = $(slide).find('.slide-topbar');
 
 			// Slide the currentSlide slide up
-			TweenMax.staggerTo([topbar, bgWrapper, contentWrapper], 0.75, {
+			TweenMax.staggerTo([topbar, bgWrapper, contentWrapper], 1, {
 				cycle: {
 					top: ['-100vh', '-100vh', '-100vh']
 				},
-				ease: Power1.easeOut
+				ease: Back.easeOut.config(0.5)
 			}, 0.08, function () {
-				$(bgWrapper).css('top', '-5px');
+				$(bgWrapper).css('top', '0');
 				$(contentWrapper).css('top', '0');
 				$(topbar).css('top', '0');
 				//Move each previous, unmoved slide up
@@ -96,6 +103,11 @@ var changeSlide;
 		}
 
 		else if (index < currentSlide) {
+
+			// Update the navbar to show the current page
+			$('a.nav-button').removeClass('active');
+			$($('a.nav-button').get(index+1)).addClass('active');
+
 			// Set the busy flag
 			busy = true;
 			slide = $('#slideWrapper'+currentSlide);
@@ -117,9 +129,9 @@ var changeSlide;
 			});
 		}
 
-		else { /* do nothing */ }
-	};
-	
+	else { /* do nothing */ }
+};
+
 	//Firefox
 	$('#content').on('DOMMouseScroll', function(event){
 		if(event.originalEvent.detail > 0) {
@@ -136,7 +148,7 @@ var changeSlide;
 	});
 
 	//IE, Opera, Safari
-	$('#content').on('mousewheel', function(event){
+	$('body').on('mousewheel', function(event){
 		//scroll down
 		if(event.originalEvent.wheelDelta < 0) { changeSlide(currentSlide + 1); }
 		//scroll up
