@@ -16,5 +16,7 @@ $(function() {
 	console.info('TimelineMax (GSAP) Version:', TimelineMax.version);
 	console.info('ScrollMagic Version:', ScrollMagic.version);
 	console.info('ScrollMagic (GSAP) Version:', ScrollMagic.version);
+	//Create window-wide "global" variable
+	window.glob = {};
 });
 }());

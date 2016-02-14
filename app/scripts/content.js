@@ -10,9 +10,9 @@ var nextSlide, showDescription;
 	var content = [];
 	var numBgs = [1,2,2,2,2,2,2];
 
-	var slides = $('.slide');
+	window.glob.slides = $('.slide');
 
-	slides.each(function (index, slide) {
+	window.glob.slides.each(function (index, slide) {
 		var bgWrapper = $(slide).find('.bgWrapper');
 		content[index] = [];
 		for (var bg = 0; bg < numBgs[index]; bg++) {
@@ -43,7 +43,7 @@ var nextSlide, showDescription;
 	var duration = 1;
 
 	nextSlide = function (currentSlide) {
-		var slide = $(slides.get(currentSlide));
+		var slide = $(window.glob.slides.get(currentSlide));
 		if (currentSlide > -1 && $(slide).find('.slideBg').length > 1) {
 
 			var bgSlides = $(slide).find('.slideBg');
@@ -105,17 +105,19 @@ var nextSlide, showDescription;
 	});
 
 	var div;
-	var divOpen = false;
+	//define global divOpen
+	window.glob.divOpen = false;
 	var conferenceContentTimeline = new TimelineMax();
 	var closeDiv = function(event) {
 		event.preventDefault();
 		/* Act on the event */
-		if (divOpen) { 
+		if (window.glob.divOpen) { 
 			conferenceContentTimeline.reverse()
 			.eventCallback('onReverseComplete', function () {
 				// conferenceContentTimeline.clear();
-				divOpen = false;
+				window.glob.divOpen = false;
 				$('.row.conferenceRow').off('click', div, closeDiv);
+				$('.row .conferenceContent div i.close').off('click', div, closeDiv);
 			});
 		}
 	};
@@ -123,26 +125,26 @@ var nextSlide, showDescription;
 	$('.conferenceContent').on('click', function (event) {
 		event.preventDefault();
 		/* Act on the event */
-		// conferenceContentTimeline.clear();
+		//Reset the timeline
 		conferenceContentTimeline = new TimelineMax();
+		//Assign div and content for animation; store the div for closing
 		div = $(this).children('div');
-		var text = $(div).children('h3, p');
+		var content = $(div).children('i, h3, p');
+		//Define animations
 		var divTween = TweenMax.to(div, 0.5, {
-			visibility: 'visible',
+			className: 'divOpen',
 			position: 'fixed',
 			top: '15%',
-			left: '5%',
-			height: '80vh',
-			width: '90vw',
-			backgroundColor: 'white',
-			zIndex: 100
+			left: '5%'
 		}).eventCallback('onComplete', function () {
-			divOpen = true;
+			window.glob.divOpen = true;
 			$('.row.conferenceRow').on('click', div, closeDiv);
+			$('.row .conferenceContent div i.close').on('click', div, closeDiv);
 		});
-		var texTween = TweenMax.to(text, 0.33, {
+		var contentween = TweenMax.to(content, 0.33, {
 				opacity: 1
 		});
-		conferenceContentTimeline.add([divTween, texTween], '+=0', 'normal', 0.5);
+		//Add animations to timeline
+		conferenceContentTimeline.add([divTween, contentween], '+=0', 'normal', 0.5);
 	});
 }());

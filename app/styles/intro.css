@@ -2,7 +2,7 @@
 
 #intro {
 	position: absolute;
-	background-color: rgba(255,255,255,0.2);
+	background-color: rgba(255,255,255,0.15);
 }
 
 #navbar, #introButtons {
@@ -11,7 +11,8 @@
 
 #Dark_Logo_bg {
 	position: absolute;
-	top: 0;
+	top: 10%;
+	/*left: 1.5%;*/
 	height: 100vh;
 	width: 100%;
 }
@@ -24,14 +25,16 @@
 
 	text-align: center;
 
-	filter: drop-shadow(1px 1px 1px black);
+	/*background-color: rgba(255,255,255,0.15);*/
+
+	filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.25));
 	z-index: 100;
 }
 
 /* Animations for the Intro Scene */
 .draw {
 	fill-opacity: 0;
-	stroke: #929497;
+	stroke: #05668D;
 	stroke-width: 0.4;
 	stroke-dasharray: 100px;
 	stroke-dashoffset: 100px;

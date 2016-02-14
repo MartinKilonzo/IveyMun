@@ -5,12 +5,11 @@ var changeSlide;
 
 	console.info('Navbar Loaded');
 	var navTimeLine = new TimelineMax();
-	var slides = $('.slide');
-	slides.length = slides.length || 7;
+	window.glob.slides.length = window.glob.slides.length || 7;
 	var isOpen = false;
 
 	$('.nav').hover(function() {
-		if (!isOpen) {
+		if (!isOpen && !window.glob.divOpen) {
 			var labels = $(this).find('.nav-label');
 			var labelBars = $(this).find('.label-bar');
 			navTimeLine.add(
@@ -63,7 +62,7 @@ var changeSlide;
 	var imagesIntervalId;
 
 	changeSlide = function (index) {
-		if (busy || (index < -1) || (index === slides.length)) { return; }
+		if (busy || (index < -1) || (index === window.glob.slides.length)) { return; }
 
 		var slide;
 		if (index > currentSlide) {
