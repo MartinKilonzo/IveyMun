@@ -144,6 +144,18 @@
 	width: 100%;
 }
 
+video.slideBg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-height: 100%;
+	min-width: 100%;
+	height: auto;
+	width: auto;
+	color: white;
+	background-color: black;
+}
+
 /*.committee-title {
 	position: relative;
 	top: 15%;

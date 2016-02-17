@@ -5,7 +5,6 @@
 // Building the pages components
 $(function() {
 	$('#content').load('partials/content.html');
-	$('#navbar').load('partials/navbar.html');
 	$('#footer').load('partials/footer.html');
 	// $('html').niceScroll();
 

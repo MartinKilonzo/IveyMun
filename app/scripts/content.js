@@ -4,13 +4,14 @@ var nextSlide, showDescription;
 	'use strict';
 
 	console.info('Content online!');
+	//Initialize the global slides variable, then load the navbar, inro, and parallax content
+	window.glob.slides = $('.slide');
+	$('#navbar').load('partials/navbar.html');
 	$('#intro').load('partials/intro.html');
 	$('#parallax').load('partials/parallax.html');
 
 	var content = [];
-	var numBgs = [1,2,2,2,2,2,2];
-
-	window.glob.slides = $('.slide');
+	var numBgs = [1,2,2,2,2,0,0];
 
 	window.glob.slides.each(function (index, slide) {
 		var bgWrapper = $(slide).find('.bgWrapper');

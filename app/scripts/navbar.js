@@ -64,6 +64,14 @@ var changeSlide;
 	changeSlide = function (index) {
 		if (busy || (index < -1) || (index === window.glob.slides.length)) { return; }
 
+		//Pause video if it exists on the current page
+		var video = $('#slideWrapper'+currentSlide).find('video.slideBg').get(0);
+		if (video && !video.paused) { video.pause(); }
+
+		//Play a video if it exists on the next (index) page
+		video = $('#slideWrapper'+index).find('video.slideBg').get(0);
+		if (video && video.paused) { video.play(); }
+
 		var slide;
 		if (index > currentSlide) {
 
