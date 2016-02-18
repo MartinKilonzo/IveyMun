@@ -260,6 +260,18 @@ video.slideBg {
 	font-size: 1.4em;
 }
 
+.row .conferenceContent .popupBg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	padding: 0;
+	height: 100vh;
+	width: 100vw;
+	opacity: 0;
+	background-color: rgba(0,0,0,0.25);
+	visibility: visible;
+}
+
 #conferenceRow1 {
 	position: relative;
 	margin-top: 7.5%;
@@ -309,3 +321,22 @@ video.slideBg {
 	/*background-color: rgba(2,195,154,0.75);*/
 }
 
+/* Committee6 (Zombie) Styles */
+
+#committee6 .video-filter {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(255,0,0,0.25);
+}
+
+#committee6 .contentWrapper .slide-title {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	max-width: 765px;
+	width: 80%;	
+	cursor: pointer;
+}

@@ -66,6 +66,29 @@ var nextSlide, showDescription;
 		}
 	};
 
+	//GOTO Description functionality
+
+	$('.slide-title').hover(function (event) {
+		event.preventDefault();
+		/* Act on the event */
+		TweenMax.to(this, 0.5, {
+			backgroundColor: 'rgba(255,255,255,0.1)'
+		});
+	},function(event) {
+		event.preventDefault();
+		/* Act on the event */
+		TweenMax.to(this, 0.5, {
+			backgroundColor: 'transparent'
+		});
+	});
+	$('.slide-title').on('click',function(event) {
+		event.preventDefault();
+		/* Act on the event */
+		var id = $(this).parent().parent().attr('id');
+		id = id.charAt(id.length-1);
+		showDescription(id);
+	});
+
 	showDescription = function (page) {
 		console.debug('unlocked', page);
 		//unlock the vertical scolling
@@ -75,13 +98,14 @@ var nextSlide, showDescription;
 		$(document).off('keydown');
 		$('body').css('overflow-y', 'visible');
 
+		//Determine the destination of the scroll
+		var position = $('.parallaxWrapper').find('#parallax'+page).offset().top;
+
 		//pan down
 		TweenMax.to(window, 1.5, {
-			scrollTo: {y: window.innerHeight},
+			scrollTo: {y: position},
 			ease: Power2.easeout
-		});
-		
-		
+		});		
 		//REMEMBER: ON PAGE CHANGE RELOCK AND BIND VERTICAL SCROLLING
 	};
 
@@ -115,9 +139,10 @@ var nextSlide, showDescription;
 		if (window.glob.divOpen) { 
 			conferenceContentTimeline.reverse()
 			.eventCallback('onReverseComplete', function () {
-				// conferenceContentTimeline.clear();
 				window.glob.divOpen = false;
+				$(div).siblings('.popupBg').remove();
 				$('.row.conferenceRow').off('click', div, closeDiv);
+				$('.row .conferenceContent .popupBg').off('click', div, closeDiv);
 				$('.row .conferenceContent div i.close').off('click', div, closeDiv);
 			});
 		}
@@ -126,12 +151,20 @@ var nextSlide, showDescription;
 	$('.conferenceContent').on('click', function (event) {
 		event.preventDefault();
 		/* Act on the event */
+		//Remove hover css effects
+		$(this).trigger('mouseleave');
 		//Reset the timeline
 		conferenceContentTimeline = new TimelineMax();
 		//Assign div and content for animation; store the div for closing
 		div = $(this).children('div');
+		//Insert the popup background	
+		$(this).prepend('<div class="popupBg"></div>');
+		var popupBg = $(this).find('.popupBg');
 		var content = $(div).children('i, h3, p');
 		//Define animations
+		var popupBgTween = TweenMax.to(popupBg, 0.25, {
+			opacity: 1
+		});
 		var divTween = TweenMax.to(div, 0.5, {
 			className: 'divOpen',
 			position: 'fixed',
@@ -140,12 +173,13 @@ var nextSlide, showDescription;
 		}).eventCallback('onComplete', function () {
 			window.glob.divOpen = true;
 			$('.row.conferenceRow').on('click', div, closeDiv);
+			$('.row .conferenceContent .popupBg').on('click', div, closeDiv);
 			$('.row .conferenceContent div i.close').on('click', div, closeDiv);
 		});
 		var contentween = TweenMax.to(content, 0.33, {
 				opacity: 1
 		});
 		//Add animations to timeline
-		conferenceContentTimeline.add([divTween, contentween], '+=0', 'normal', 0.5);
+		conferenceContentTimeline.add([popupBgTween, divTween, contentween], '+=0', 'normal', 0.5);
 	});
 }());
