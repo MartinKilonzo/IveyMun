@@ -189,10 +189,11 @@ video.slideBg {
 
 /* Committee Styles */
 .row.conferenceRow {
-	position: absolute;
+	position: relative;
 	top: 50%;
+	left: 0;
 	width: 100%;
-	transform: translate(0, -50%)
+	transform: translate(0, -50%);
 }
 
 .row .conferenceContent {
@@ -213,67 +214,6 @@ video.slideBg {
 .row .conferenceContent h2 {
 	margin-bottom: 20px;
 	font-size: 1.6em;
-}
-
-.row .conferenceContent div {
-	visibility: hidden;
-	position: absolute;
-	top: 33%;
-	left: 33%;
-	height: 33%;
-	width: 33%;
-
-	padding: 8% 8% 8% 8%;
-
-	color: black;
-	text-align: left;
-	text-transform: none;
-
-	background-color: transparent;
-
-	cursor: default;
-	
-}
-.row .conferenceContent div.divOpen {
-	visibility: visible;
-	height: 80vh;
-	width: 90vw;
-	background-color: white;
-	z-index: 100;
-}
-
-.row .conferenceContent div i.close {
-	position: absolute;
-
-	top: 2vw;
-	right: 2vw;
-
-/*	color: rgb(0, 168, 150);*/
-	opacity: 0;
-	font-size: 25px;
-	cursor: pointer;
-}
-
-.row .conferenceContent div h3 {
-	opacity: 0;
-	font-size: 2em;
-}
-
-.row .conferenceContent div p {
-	opacity: 0;
-	font-size: 1.4em;
-}
-
-.row .conferenceContent .popupBg {
-	position: fixed;
-	top: 0;
-	left: 0;
-	padding: 0;
-	height: 100vh;
-	width: 100vw;
-	opacity: 0;
-	background-color: rgba(0,0,0,0.25);
-	visibility: visible;
 }
 
 #conferenceRow1 {
@@ -323,6 +263,65 @@ video.slideBg {
 	width: 50%;
 	font-size: 1.4em;
 	/*background-color: rgba(2,195,154,0.75);*/
+}
+
+.conferenceDetails {
+	visibility: hidden;
+	position: absolute;
+	top: 33%;
+	left: 33%;
+	height: 33%;
+	width: 33%;
+
+	padding: 8% 8% 8% 8%;
+
+	color: black;
+	text-align: left;
+	text-transform: none;
+
+	background-color: transparent;
+
+	cursor: default;
+	
+}
+.conferenceDetails.divOpen {
+	visibility: visible;
+	height: 80vh;
+	background-color: white;
+	z-index: 100;
+}
+
+.conferenceDetails i.close {
+	position: absolute;
+	top: 2vw;
+	right: 2vw;
+	opacity: 0;
+	font-size: 25px;
+	cursor: pointer;
+	z-index: 101;
+}
+
+.conferenceDetails h3, #how.conferenceDetails h3 {
+	opacity: 0;
+	font-size: 2em;
+}
+
+.conferenceDetails p, #how.conferenceDetails p {
+	opacity: 0;
+	font-size: 1.4em;
+}
+
+.popupWrapper {
+	position: fixed;
+	display: none;
+	top: 0;
+	left: 0;
+	padding: 0;
+	height: 100vh;
+	width: 100vw;
+	opacity: 0;
+	background-color: rgba(0,0,0,0.25);
+	z-index: 99;
 }
 
 /* Committee Styles */

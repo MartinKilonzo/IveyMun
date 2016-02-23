@@ -170,10 +170,10 @@ var nextSlide, showDescription;
 			.eventCallback('onReverseComplete', function () {
 				divOpening = false;
 				window.glob.divOpen = false;
-				$(div).siblings('.popupBg').remove();
+				$('nav').css('padding-left', '200px');
 				$('.row.conferenceRow').off('click', div, closeDiv);
-				$('.row .conferenceContent .popupBg').off('click', div, closeDiv);
-				$('.row .conferenceContent div i.close').off('click', div, closeDiv);
+				$('.popupWrapper').off('click', div, closeDiv);
+				$('.conferenceDetails i.close').off('click', div, closeDiv);
 			});
 		}
 	};
@@ -188,31 +188,35 @@ var nextSlide, showDescription;
 		//Reset the timeline
 		conferenceContentTimeline = new TimelineMax();
 		//Assign div and content for animation; store the div for closing
-		div = $(this).children('div');
+		var thisID = '#'+$(this).attr('id');
+		div = $(thisID+'.conferenceDetails');
+		console.debug(div);
 		//Insert the popup background	
-		$(this).prepend('<div class="popupBg"></div>');
-		var popupBg = $(this).find('.popupBg');
+		var popupWrapper = $(div).parent();
 		var content = $(div).children('i, h3, p');
+		console.debug(popupWrapper, content);
 		//Define animations
-		var popupBgTween = TweenMax.to(popupBg, 0.25, {
+		var popupWrapperTween = TweenMax.to(popupWrapper, 0.25, {
+			display: 'block',
 			opacity: 1
 		});
 		var divTween = TweenMax.to(div, 0.5, {
-			className: 'divOpen',
+			className: 'conferenceDetails divOpen',
 			position: 'fixed',
 			top: '15%',
-			left: '5%'
+			left: '5%',
+			width: '90vw'
 		}).eventCallback('onComplete', function () {
 			divOpening = false;
 			window.glob.divOpen = true;
-			$('.row.conferenceRow').on('click', div, closeDiv);
-			$('.row .conferenceContent .popupBg').on('click', div, closeDiv);
-			$('.row .conferenceContent div i.close').on('click', div, closeDiv);
+			$('nav').css('padding-left', '0');
+			$('.popupWrapper').on('click', div, closeDiv);
+			$('.conferenceDetails i.close').on('click', div, closeDiv);
 		});
 		var contentween = TweenMax.to(content, 0.33, {
 				opacity: 1
 		});
 		//Add animations to timeline
-		conferenceContentTimeline.add([popupBgTween, divTween, contentween], '+=0', 'normal', 0.5);
+		conferenceContentTimeline.add([popupWrapperTween, divTween, contentween], '+=0', 'normal', 0.5);
 	});
 }());

@@ -21,14 +21,12 @@
 	position: relative;
 	height: 5%;
 	width: 100%;
-	/*background-color: rgba(0,0,0,0.15);*/
 }
 
 #parallax1 .section-header {
 	position: relative;
 	height: 5%;
 	width: 100%;
-	background-color: rgba(0,0,0,0.15);
 }
 
 .parallaxWrapper .section-header img {
