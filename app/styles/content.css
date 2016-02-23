@@ -142,6 +142,8 @@
 	left: 0;
 	height: 100%;
 	width: 100%;
+	/*filter: blur(3px);
+	-webkit-filter: blur(3px);*/
 }
 
 video.slideBg {
@@ -187,10 +189,12 @@ video.slideBg {
 
 /* Committee Styles */
 .row.conferenceRow {
-	position: relative;
-	top: 10%;
-	height: 100%;
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	transform: translate(0, -50%)
 }
+
 .row .conferenceContent {
 	position: relative;
 	width: 20%;
@@ -321,6 +325,36 @@ video.slideBg {
 	/*background-color: rgba(2,195,154,0.75);*/
 }
 
+/* Committee Styles */
+
+.row.committeeRow {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+}
+
+.row .committeeContent {
+	position: relative;
+	width: 100%;
+	padding: 10px 30px 10px 30px;
+	color: white;
+	text-align: center;
+	text-transform: uppercase;
+	background-color: transparent;
+	border-style: solid;
+	border-color: white;
+	border-width: 3.5px;
+
+	cursor: pointer;
+}
+
+.row .committeeContent h2 {
+	margin-bottom: 20px;
+	font-size: 3.5em;
+}
+
 /* Committee6 (Zombie) Styles */
 
 #committee6 .video-filter {
@@ -339,4 +373,6 @@ video.slideBg {
 	max-width: 765px;
 	width: 80%;	
 	cursor: pointer;
+/*	filter: drop-shadow(01px 1px 5px rgba(255,255,255,0);
+	-webkit-filter: drop-shadow(1px 1px 5px rgba(255,255,255,0));*/
 }

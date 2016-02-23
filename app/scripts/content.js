@@ -54,6 +54,8 @@ var nextSlide, showDescription;
 			TweenMax
 			.to($(bgSlides).get(slideImg--), duration, {
 				delay: delay,
+				filter: 'blur(3px)',
+				'-webkit-filter': 'blur(3px)',
 				// left: '-100vw',
 				opacity: 0
 			});
@@ -68,19 +70,46 @@ var nextSlide, showDescription;
 
 	//GOTO Description functionality
 
+	// COMMITTEE CONTENT BUTTON (IE LEARN MORE, SHOW DESCRIPTION) FUNCTIONALITY //
+
+	$('.committeeContent').hover(function(event) {
+		event.preventDefault();
+		/* Act on the event */
+		TweenMax.to(this, 0.25, {
+			backgroundColor: 'rgba(255,255,255,0.3)'
+		});
+		// TODO: STOP BG SLIDE SHOW, BLUR BG
+	}, function (event) {
+		TweenMax.to(this, 0.25, {
+			backgroundColor: 'transparent'
+		});
+		// TODO: RESUME BG SLIDE SHOW, UNBLUR BG
+	});
+
+	$('.committeeContent').on('click',function(event) {
+		event.preventDefault();
+		/* Act on the event */
+		var id = $(this).parent().parent().parent().attr('id');
+		id = id.charAt(id.length-1);
+		showDescription(id);
+	});
+
 	$('.slide-title').hover(function (event) {
 		event.preventDefault();
 		/* Act on the event */
 		TweenMax.to(this, 0.5, {
-			backgroundColor: 'rgba(255,255,255,0.1)'
+			filter: 'drop-shadow(1px 1px 5px rgba(255,255,255,1)',
+			'-webkit-filter': 'drop-shadow(1px 1px 5px rgba(255,255,255,1))'
 		});
 	},function(event) {
 		event.preventDefault();
 		/* Act on the event */
 		TweenMax.to(this, 0.5, {
-			backgroundColor: 'transparent'
+			filter: 'none',
+			'-webkit-filter': 'none'
 		});
 	});
+
 	$('.slide-title').on('click',function(event) {
 		event.preventDefault();
 		/* Act on the event */
@@ -139,6 +168,7 @@ var nextSlide, showDescription;
 		if (window.glob.divOpen) { 
 			conferenceContentTimeline.reverse()
 			.eventCallback('onReverseComplete', function () {
+				divOpening = false;
 				window.glob.divOpen = false;
 				$(div).siblings('.popupBg').remove();
 				$('.row.conferenceRow').off('click', div, closeDiv);
@@ -147,9 +177,11 @@ var nextSlide, showDescription;
 			});
 		}
 	};
-
+	var divOpening = false;
 	$('.conferenceContent').on('click', function (event) {
 		event.preventDefault();
+		if (divOpening) { return; }
+		divOpening = true;
 		/* Act on the event */
 		//Remove hover css effects
 		$(this).trigger('mouseleave');
@@ -171,6 +203,7 @@ var nextSlide, showDescription;
 			top: '15%',
 			left: '5%'
 		}).eventCallback('onComplete', function () {
+			divOpening = false;
 			window.glob.divOpen = true;
 			$('.row.conferenceRow').on('click', div, closeDiv);
 			$('.row .conferenceContent .popupBg').on('click', div, closeDiv);
