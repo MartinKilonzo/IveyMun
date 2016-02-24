@@ -11,7 +11,7 @@ var nextSlide, showDescription;
 	$('#parallax').load('partials/parallax.html');
 
 	var content = [];
-	var numBgs = [1,2,2,2,2,0,0];
+	var numBgs = [1,2,2,0,0];
 
 	window.glob.slides.each(function (index, slide) {
 		var bgWrapper = $(slide).find('.bgWrapper');
@@ -55,13 +55,14 @@ var nextSlide, showDescription;
 			.to($(bgSlides).get(slideImg--), duration, {
 				delay: delay,
 				filter: 'blur(3px)',
-				'-webkit-filter': 'blur(3px)',
 				// left: '-100vw',
 				opacity: 0
 			});
 			TweenMax
 			.to($(bgSlides).get(slideImg), duration, {
 				delay: delay,
+				filter: 'blur(3px)',
+				'-webkit-filter': 'blur(3px)',
 				// left: '0',
 				opacity: 1
 			});
@@ -163,6 +164,7 @@ var nextSlide, showDescription;
 	window.glob.divOpen = false;
 	var conferenceContentTimeline = new TimelineMax();
 	var closeDiv = function(event) {
+		console.log('closing');
 		event.preventDefault();
 		/* Act on the event */
 		if (window.glob.divOpen) { 
@@ -192,7 +194,7 @@ var nextSlide, showDescription;
 		div = $(thisID+'.conferenceDetails');
 		console.debug(div);
 		//Insert the popup background	
-		var popupWrapper = $(div).parent();
+		var popupWrapper = $(div).siblings('.popupWrapper');
 		var content = $(div).children('i, h3, p');
 		console.debug(popupWrapper, content);
 		//Define animations

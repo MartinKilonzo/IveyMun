@@ -321,7 +321,6 @@ video.slideBg {
 	width: 100vw;
 	opacity: 0;
 	background-color: rgba(0,0,0,0.25);
-	z-index: 99;
 }
 
 /* Committee Styles */
@@ -356,7 +355,7 @@ video.slideBg {
 
 /* Committee6 (Zombie) Styles */
 
-#committee6 .video-filter {
+#committee4 .video-filter {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -365,7 +364,7 @@ video.slideBg {
 	background-color: rgba(255,0,0,0.25);
 }
 
-#committee6 .contentWrapper .slide-title {
+#committee4 .contentWrapper .slide-title {
 	position: absolute;
 	bottom: 0;
 	right: 0;
