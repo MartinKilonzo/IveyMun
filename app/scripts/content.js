@@ -36,8 +36,53 @@ var nextSlide, showDescription;
 			// 	width: 100/numBgs[index]+'vw',
 			// 	marginLeft: marginLeft
 			// }).appendTo($(slide).children('.slide-downbar'));
-}
-});
+		}
+	});
+
+	var bindScroll = function (state) {
+		if (state) {
+			//Firefox
+			$('#content').on('DOMMouseScroll', function(event){
+				if(event.originalEvent.detail > 0) {
+				//scroll down
+				changeSlide(currentSlide + 1);
+				}
+				else {
+					//scroll up
+					changeSlide(currentSlide - 1);
+				}
+
+				//allow page fom scrolling
+				event.stopPropagation();
+			});
+
+			//IE, Opera, Safari
+			$('body').on('mousewheel', function(event){
+				//scroll down
+				if(event.originalEvent.wheelDelta < 0) { changeSlide(currentSlide + 1); }
+				//scroll up
+				else { changeSlide(currentSlide - 1); }
+
+				//allow page fom scrolling
+				event.stopPropagation();
+			});
+
+			$(document).on('keydown', function(event) {
+				/* Act on the event */
+				// On down-arrow or right-arrow
+				if (event.which === 40 || event.which === 39) { changeSlide(currentSlide + 1); }
+				// On up-arrow or left-arrow
+				else if (event.which === 38 || event.which === 37) { changeSlide(currentSlide - 1); }
+				event.preventDefault();
+			});
+		}
+
+		if (!state) {
+			$('#content').off('DOMMouseScroll');
+			$('body').off('mousewheel');
+			$(document).off('keydown');
+		}
+	};
 
 	var slideImg = -1;
 	var delay = 2;
@@ -120,13 +165,10 @@ var nextSlide, showDescription;
 	});
 
 	showDescription = function (page) {
-		console.debug('unlocked', page);
 		//unlock the vertical scolling
 		//unbind the vertical scrolling
 		
-		$('body').off('mousewheel');
-		$(document).off('keydown');
-		$('body').css('overflow-y', 'visible');
+		bindScroll(false);
 
 		//Determine the destination of the scroll
 		var position = $('.parallaxWrapper').find('#parallax'+page).offset().top;
@@ -165,8 +207,8 @@ var nextSlide, showDescription;
 	//define global divOpen
 	window.glob.divOpen = false;
 	var conferenceContentTimeline = new TimelineMax();
+
 	var closeDiv = function(event) {
-		console.log('closing');
 		event.preventDefault();
 		/* Act on the event */
 		if (window.glob.divOpen) { 
@@ -178,9 +220,11 @@ var nextSlide, showDescription;
 				$('.row.conferenceRow').off('click', div, closeDiv);
 				$('.popupWrapper').off('click', div, closeDiv);
 				$('.conferenceDetails i.close').off('click', div, closeDiv);
+				bindScroll(true);
 			});
 		}
 	};
+
 	var divOpening = false;
 	$('.conferenceContent').on('click', function (event) {
 		event.preventDefault();
@@ -194,11 +238,9 @@ var nextSlide, showDescription;
 		//Assign div and content for animation; store the div for closing
 		var thisID = '#'+$(this).attr('id');
 		div = $(thisID+'.conferenceDetails');
-		console.debug(div);
 		//Insert the popup background	
 		var popupWrapper = $(div).siblings('.popupWrapper');
 		var content = $(div).children('i, h3, p');
-		console.debug(popupWrapper, content);
 		//Define animations
 		var popupWrapperTween = TweenMax.to(popupWrapper, 0.25, {
 			display: 'block',
@@ -213,6 +255,7 @@ var nextSlide, showDescription;
 		}).eventCallback('onComplete', function () {
 			divOpening = false;
 			window.glob.divOpen = true;
+			bindScroll(false);
 			$('nav').css('padding-left', '0');
 			$('.popupWrapper').on('click', div, closeDiv);
 			$('.conferenceDetails i.close').on('click', div, closeDiv);

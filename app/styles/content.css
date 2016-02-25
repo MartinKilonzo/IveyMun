@@ -266,6 +266,7 @@ video.slideBg {
 }
 
 .conferenceDetails {
+	overflow-y: auto;
 	visibility: hidden;
 	position: absolute;
 	top: 33%;
@@ -316,6 +317,15 @@ video.slideBg {
 .conferenceDetails p, #how.conferenceDetails p {
 	opacity: 0;
 	font-size: 1.4em;
+}
+
+#how.conferenceDetails p {
+	opacity: 0;
+	font-size: 0.80em;
+}
+
+#how.conferenceDetails li {
+	font-size: 0.80em;
 }
 
 .conferenceDetails iframe {
