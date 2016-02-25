@@ -169,6 +169,7 @@ var nextSlide, showDescription;
 		//unbind the vertical scrolling
 		
 		bindScroll(false);
+		$('body').css('overflow-y', 'visible');
 
 		//Determine the destination of the scroll
 		var position = $('.parallaxWrapper').find('#parallax'+page).offset().top;
