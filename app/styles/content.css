@@ -266,7 +266,6 @@ video.slideBg {
 }
 
 .conferenceDetails {
-	overflow-y: auto;
 	visibility: hidden;
 	position: absolute;
 	top: 33%;
@@ -293,6 +292,7 @@ video.slideBg {
 }
 
 .conferenceDetails.divOpen {
+	overflow-y: auto;
 	visibility: visible;
 	height: 80vh;
 	background-color: white;
