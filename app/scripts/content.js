@@ -82,7 +82,7 @@ var nextSlide, showDescription;
 		// TODO: STOP BG SLIDE SHOW, BLUR BG
 	}, function (event) {
 		TweenMax.to(this, 0.25, {
-			backgroundColor: 'transparent'
+			backgroundColor: 'rgba(255,255,255,0.15)'
 		});
 		// TODO: RESUME BG SLIDE SHOW, UNBLUR BG
 	});
@@ -146,6 +146,7 @@ var nextSlide, showDescription;
 		/* Act on the event */
 		TweenMax.to(this, 0.25, {
 			backgroundColor: 'rgba(255,255,255,0.3)'
+			// backgroundOpacity: '+=30%'
 		});
 		if (this.id !== 'how') {
 			$(this).children('h2').prepend('<i class="fa fa-angle-right"></i> ');
@@ -156,6 +157,7 @@ var nextSlide, showDescription;
 		if (this.id !== 'how') { $(this).children('h2').find('i').remove(); }
 		TweenMax.to(this, 0.25, {
 			backgroundColor: 'transparent'
+			// backgroundOpacity: '-=30%'
 		});
 	});
 
