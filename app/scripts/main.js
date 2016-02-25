@@ -7,7 +7,7 @@ $(function() {
 	$('#content').load('partials/content.html');
 	$('#footer').load('partials/footer.html');
 	// $('html').niceScroll();
-
+	document.body.addEventListener('touchstart', function(e){ e.preventDefault(); });
 
 	console.info('Pages Loaded');
 

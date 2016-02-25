@@ -34,7 +34,7 @@
 /* Animations for the Intro Scene */
 .draw {
 	fill-opacity: 0;
-	stroke: #05668D;
+	stroke: #028090;
 	stroke-width: 0.4;
 	stroke-dasharray: 100px;
 	stroke-dashoffset: 100px;

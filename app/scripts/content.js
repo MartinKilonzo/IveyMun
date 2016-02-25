@@ -11,7 +11,7 @@ var nextSlide, showDescription;
 	$('#parallax').load('partials/parallax.html');
 
 	var content = [];
-	var numBgs = [1,2,2,0,0];
+	var numBgs = [1,4,1,0,0];
 
 	window.glob.slides.each(function (index, slide) {
 		var bgWrapper = $(slide).find('.bgWrapper');
@@ -61,8 +61,8 @@ var nextSlide, showDescription;
 			TweenMax
 			.to($(bgSlides).get(slideImg), duration, {
 				delay: delay,
-				filter: 'blur(3px)',
-				'-webkit-filter': 'blur(3px)',
+				// filter: 'blur(3px)',
+				// '-webkit-filter': 'blur(3px)',
 				// left: '0',
 				opacity: 1
 			});

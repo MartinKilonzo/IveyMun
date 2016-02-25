@@ -234,7 +234,7 @@ video.slideBg {
 
 #who {
 	/*background-color: rgba(0,168,150,0.75);*/
-	left: 15%;
+	left: 40%;
 	top: 0;
 }
 
@@ -284,6 +284,13 @@ video.slideBg {
 	cursor: default;
 	
 }
+
+@media (min-width: 1000px) {
+	.conferenceDetails {
+		padding: 4% 4% 4% 4%;
+	}
+}
+
 .conferenceDetails.divOpen {
 	visibility: visible;
 	height: 80vh;
@@ -309,6 +316,15 @@ video.slideBg {
 .conferenceDetails p, #how.conferenceDetails p {
 	opacity: 0;
 	font-size: 1.4em;
+}
+
+.conferenceDetails iframe {
+	position: relative;
+	top: 10px;
+	height: 80%;
+	width: 100%;
+	left: 50%;
+	transform: translate(-50%,0);
 }
 
 .popupWrapper {

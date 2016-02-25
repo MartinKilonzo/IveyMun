@@ -15,7 +15,7 @@ var changeSlide;
 			navTimeLine.add(
 				TweenMax.to(this, 0.5, {
 					width: '25%',
-					maxWidth: '240px',
+					maxWidth: '300px',
 					paddingLeft: '0'
 				}).eventCallback('onComplete', function() {
 					TweenMax.to([labels, labelBars], 0.2, {
