@@ -35,26 +35,51 @@
 	};
 
 	$(window).on('resize', resizeHeader);
+	var nav = $('.nav');
+	var introTimeline = new TimelineMax();
+	var labels = $(nav).find('.nav-label');
+	var labelBars = $(nav).find('.label-bar');
+	introTimeline.add(
+		TweenMax.to(nav, 0.5, {
+			delay: 7,
+			width: '10%',
+			maxWidth: '300px',
+			paddingLeft: '0'
+		}).eventCallback('onComplete', function() {
+			introTimeline.reverse();
+		}));
 
-	var animateScene1 = new TimelineMax();
-	animateScene1
-	.insert(TweenMax.to('#Dark_Logo_bg', 2, {
-		delay: 6,
-		height: '75vh',
-		ease: Power2.easeOut,
-		force3D: true,
-		onComplete: resumeScroll
-	}))
-	.insert(TweenMax.to('#navbar', 2, {
-		delay: 7,
-		opacity: 1,
-		ease: Power2.easeOut
-	}))
-	.insert(TweenMax.to('#introButtons', 2, {
-		delay: 7,
-		opacity: 1,
-		ease: Power2.easeOut
-	}));
-	animateScene1.progress(100);
+	// introTimeline.add(
+	// 	TweenMax.to([labels, labelBars], 0.2, {
+	// 		opacity: 0
+	// 	}).eventCallback('onComplete', function() {
+	// 		labels.css('display', 'none');
+	// 		TweenMax.to(nav, 0.75, {
+	// 			width: '0',
+	// 			paddingLeft: '200px'
+	// 		}).eventCallback('onComplete', function () {
+	// 		});
+	// 	}));
+
+	// var animateScene1 = new TimelineMax();
+	// animateScene1
+	// .insert(TweenMax.to('#Dark_Logo_bg', 2, {
+	// 	delay: 6,
+	// 	height: '75vh',
+	// 	ease: Power2.easeOut,
+	// 	force3D: true,
+	// 	onComplete: resumeScroll
+	// }))
+	// .insert(TweenMax.to('#navbar', 2, {
+	// 	delay: 7,
+	// 	opacity: 1,
+	// 	ease: Power2.easeOut
+	// }))
+	// .insert(TweenMax.to('#introButtons', 2, {
+	// 	delay: 7,
+	// 	opacity: 1,
+	// 	ease: Power2.easeOut
+	// }));
+	// animateScene1.progress(100);
 	// TODO: ADD SCROLL INDICATOR TO BOTTOM OF PAGE, AND ON SIDE FOR NAV BAR (BARS WITH CARRET ARROW)
 }());

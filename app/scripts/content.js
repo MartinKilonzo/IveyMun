@@ -1,5 +1,5 @@
 /*global TweenMax ScrollMagic*/
-var nextSlide, showDescription;
+var nextSlide, showDescription, countdown;
 (function () {
 	'use strict';
 
@@ -26,16 +26,6 @@ var nextSlide, showDescription;
 				backgroundRepeat: 'no-repeat',
 				backgroundPosition: 'center, center'
 			}).prependTo(bgWrapper);
-			// Add a button
-			// TODO: Complete the link for the button
-			// var marginLeft;
-			// if (bg === 0) { marginLeft = 0; }
-			// else { marginLeft = '2px'; }
-			// $('<div class="slide-button"></div>').css({
-			// 	left: 100*bg/numBgs[index]+'vw',
-			// 	width: 100/numBgs[index]+'vw',
-			// 	marginLeft: marginLeft
-			// }).appendTo($(slide).children('.slide-downbar'));
 		}
 	});
 
@@ -204,6 +194,35 @@ var nextSlide, showDescription;
 		});
 	});
 
+	var formatTime = function (time) {
+		var formattedTime = {};
+		time = (time / 1000) | 0;
+		// Seconds
+		formattedTime.seconds = time % 60;
+		time = (time / 60) | 0;
+		//Minutes
+		formattedTime.minutes = time % 60;
+		time = (time / 60) | 0;
+		//Hours
+		formattedTime.hours = time % 24;
+		time = (time / 24) | 0;
+		//Days
+		formattedTime.days = time;
+		return formattedTime;
+	};
+
+	var timerIntervalId;
+	var conferenceDate = new Date("March 12, 2016, 9:00 am");
+	countdown = function () {
+		var formattedTime = formatTime(conferenceDate - new Date());
+		console.log(formattedTime);
+		$('#when.conferenceDetails .countdown').remove();
+		$('#when.conferenceDetails #days').append('<span class="countdown">'+formattedTime.days+'</span>');
+		$('#when.conferenceDetails #hours').append('<span class="countdown">'+formattedTime.hours+'</span>');
+		$('#when.conferenceDetails #minutes').append('<span class="countdown">'+formattedTime.minutes+'</span>');
+		$('#when.conferenceDetails #seconds').append('<span class="countdown">'+formattedTime.seconds+'</span>');
+	};
+
 	var div;
 	//define global divOpen
 	window.glob.divOpen = false;
@@ -215,6 +234,10 @@ var nextSlide, showDescription;
 		if (window.glob.divOpen) { 
 			conferenceContentTimeline.reverse()
 			.eventCallback('onReverseComplete', function () {
+				if(timerIntervalId) {
+					clearInterval(timerIntervalId);
+					timerIntervalId = undefined;
+				}
 				divOpening = false;
 				window.glob.divOpen = false;
 				$('nav').css('padding-left', '200px');
@@ -254,6 +277,7 @@ var nextSlide, showDescription;
 			left: '5%',
 			width: '90vw'
 		}).eventCallback('onComplete', function () {
+			if (thisID === '#when') { timerIntervalId = setInterval(function() { countdown(); }, 500); }
 			divOpening = false;
 			window.glob.divOpen = true;
 			bindScroll(false);

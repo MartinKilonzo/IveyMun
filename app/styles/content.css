@@ -328,6 +328,41 @@ video.slideBg {
 	font-size: 0.80em;
 }
 
+#when h4 {
+	position: absolute;
+	top: 60%;
+	left: 50%;
+	transform: translate(-50%,0);
+}
+
+#when .clock {
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	left: 0;
+	transform: translate(0,-50%);
+}
+
+#when.conferenceDetails .clock .countdown, #when.conferenceDetails .clock .colon {
+	font-size: 5em;
+	text-align: center;
+	font-family: 'Quicksand', sans-serif;
+}
+
+#when.conferenceDetails .clock .countdownLabels {
+	font-size: 1em;
+	text-align: center;
+	font-family: 'Quicksand', sans-serif;
+}
+
+#days, #hours, #minutes, #seconds {
+	text-align: center;
+}
+
+#days {
+	margin-left: 5%;
+}
+
 .conferenceDetails iframe {
 	position: relative;
 	top: 10px;

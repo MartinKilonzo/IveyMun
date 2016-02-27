@@ -6,12 +6,12 @@
 }
 
 #navbar, #introButtons {
-	opacity: 0;
+	opacity: 1;
 }
 
 #Dark_Logo_bg {
 	position: absolute;
-	top: 10%;
+	top: 0;
 	/*left: 1.5%;*/
 	height: 100vh;
 	width: 100%;

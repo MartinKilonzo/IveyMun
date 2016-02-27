@@ -34,12 +34,12 @@ var changeSlide;
 		}, function() {
 			if (isOpen) {
 				var nav = this;
-				var lables = $(this).find('.nav-label');
+				var labels = $(this).find('.nav-label');
 				var labelBars = $(this).find('.label-bar');
-				navTimeLine.add(TweenMax.to([lables, labelBars], 0.2, {
+				navTimeLine.add(TweenMax.to([labels, labelBars], 0.2, {
 					opacity: 0
 				}).eventCallback('onComplete', function() {
-					lables.css('display', 'none');
+					labels.css('display', 'none');
 					TweenMax.to(nav, 0.75, {
 						width: '0',
 						paddingLeft: '200px'
