@@ -39,17 +39,20 @@
 	var introTimeline = new TimelineMax();
 	var labels = $(nav).find('.nav-label');
 	var labelBars = $(nav).find('.label-bar');
-	introTimeline.add(
-		TweenMax.to(nav, 0.5, {
-			delay: 7,
-			width: '10%',
-			maxWidth: '300px',
-			paddingLeft: '0',
-			force3D: true
-		}).eventCallback('onComplete', function() {
-			introTimeline.reverse();
-			resumeScroll();
-		}));
+	setTimeout(function () {
+		if (!window.glob.navIsOpen) {
+			introTimeline.add(
+				TweenMax.to(nav, 0.5, {
+					width: '10%',
+					maxWidth: '300px',
+					paddingLeft: '0',
+					force3D: true
+				}).eventCallback('onComplete', function() {
+					resumeScroll();
+				}));
+		}
+	}, 7000);
+	
 
 	// introTimeline.add(
 	// 	TweenMax.to([labels, labelBars], 0.2, {

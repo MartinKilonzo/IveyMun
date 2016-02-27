@@ -6,10 +6,10 @@ var changeSlide;
 		console.info('Navbar Loaded');
 		var navTimeLine = new TimelineMax();
 		window.glob.slides.length = window.glob.slides.length || 7;
-		var isOpen = false;
+		window.glob.navIsOpen = false;
 
 		$('.nav').hover(function() {
-			if (!isOpen && !window.glob.divOpen) {
+			if (!window.glob.navIsOpen && !window.glob.divOpen) {
 				var labels = $(this).find('.nav-label');
 				var labelBars = $(this).find('.label-bar');
 				navTimeLine.add(
@@ -27,12 +27,12 @@ var changeSlide;
 							paddingTop: '8px',
 							padddingBottom: '8px'
 						});
-						isOpen = true;
+						window.glob.navIsOpen = true;
 					}));
 			}
 			
 		}, function() {
-			if (isOpen) {
+			if (window.glob.navIsOpen) {
 				var nav = this;
 				var labels = $(this).find('.nav-label');
 				var labelBars = $(this).find('.label-bar');
@@ -44,7 +44,7 @@ var changeSlide;
 						width: '0',
 						paddingLeft: '200px'
 					}).eventCallback('onComplete', function () {
-						isOpen = false;
+						window.glob.navIsOpen = false;
 					});
 				}));
 			}
