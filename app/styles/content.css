@@ -158,35 +158,6 @@ video.slideBg {
 	background-color: black;
 }
 
-/*.committee-title {
-	position: relative;
-	top: 15%;
-	left: 0;
-	height: 60%;
-	width: 100%;
-
-	background-color: rgba(0,0,0,0.55);
-}
-
-.committee-title > h1 {
-	color: white;
-	font-size: 8em;
-	text-align: center;
-	vertical-align: middle;
-}*/
-
-
-
-/*.committee-content {
-	position: relative;
-	top: 2%;
-	bottom: 0;
-	left: 55%;
-	height: 60%;
-	width: 45%;
-	background-color: rgba(0,0,0,0.55);
-}*/
-
 /* Committee Styles */
 .row.conferenceRow {
 	position: relative;
@@ -328,9 +299,12 @@ video.slideBg {
 	font-size: 0.80em;
 }
 
+#when {
+	font-family: 'Quicksand', sans-serif;
+}
 #when h4 {
 	position: absolute;
-	top: 60%;
+	top: 65%;
 	left: 50%;
 	transform: translate(-50%,0);
 }

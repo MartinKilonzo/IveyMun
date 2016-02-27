@@ -44,9 +44,11 @@
 			delay: 7,
 			width: '10%',
 			maxWidth: '300px',
-			paddingLeft: '0'
+			paddingLeft: '0',
+			force3D: true
 		}).eventCallback('onComplete', function() {
 			introTimeline.reverse();
+			resumeScroll();
 		}));
 
 	// introTimeline.add(
