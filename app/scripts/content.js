@@ -215,7 +215,6 @@ var nextSlide, showDescription, countdown;
 	var conferenceDate = new Date("March 12, 2016, 9:00 am");
 	countdown = function () {
 		var formattedTime = formatTime(conferenceDate - new Date());
-		console.log(formattedTime);
 		$('#when.conferenceDetails .countdown').remove();
 		$('#when.conferenceDetails #days').append('<span class="countdown">'+formattedTime.days+'</span>');
 		$('#when.conferenceDetails #hours').append('<span class="countdown">'+formattedTime.hours+'</span>');
@@ -262,6 +261,8 @@ var nextSlide, showDescription, countdown;
 		//Assign div and content for animation; store the div for closing
 		var thisID = '#'+$(this).attr('id');
 		div = $(thisID+'.conferenceDetails');
+		// If it is the "When" view, start the countdown clock
+		if (thisID === '#when') { timerIntervalId = setInterval(function() { countdown(); }, 500); }
 		//Insert the popup background	
 		var popupWrapper = $(div).siblings('.popupWrapper');
 		var content = $(div).children('i, h3, p');
@@ -277,7 +278,6 @@ var nextSlide, showDescription, countdown;
 			left: '5%',
 			width: '90vw'
 		}).eventCallback('onComplete', function () {
-			if (thisID === '#when') { timerIntervalId = setInterval(function() { countdown(); }, 500); }
 			divOpening = false;
 			window.glob.divOpen = true;
 			bindScroll(false);
