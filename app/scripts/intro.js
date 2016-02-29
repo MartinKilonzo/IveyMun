@@ -39,6 +39,10 @@
 	var introTimeline = new TimelineMax();
 	var labels = $(nav).find('.nav-label');
 	var labelBars = $(nav).find('.label-bar');
+	TweenMax.to('#Dark_Logo_bg', 2, {
+			delay: 7,
+			height: '75vh'
+	});
 	setTimeout(function () {
 		if (!window.glob.navIsOpen) {
 			introTimeline.add(
@@ -50,7 +54,6 @@
 					ease: Back.easeOut.config(0.5)
 				}).eventCallback('onComplete', function() {
 					resumeScroll();
-					introTimeline.reverse();
 				}));
 		}
 	}, 10000);
