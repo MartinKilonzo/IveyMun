@@ -13,7 +13,7 @@
 	position: absolute;
 	top: 0;
 	/*left: 1.5%;*/
-	height: 100vh;
+	height: 75vh;
 	width: 100%;
 }
 
@@ -93,4 +93,48 @@
 		stroke-opacity: 0;
 		opacity: 0.75;
 	}
+}
+
+#introClock {
+	opacity: 0;
+	animation-name: fillTimer;
+	animation-delay: 7s;
+	animation-duration: 2s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: 1; 
+	animation-timing-function: linear;
+
+	position: relative;
+	top: -10%;
+	width: 80%;
+	height: 25%;
+	margin-right: 10%;
+	margin-bottom: 10%;
+	margin-left: 10%;
+	border-width: 3px;
+	border-style: solid;
+	border-color: white;
+	color: white;
+	background-color: rgba(255,255,255,0.15);
+}
+
+@keyframes fillTimer {
+	to {
+		opacity: 1;
+	}
+}
+
+#introClock.clock .col-xs-2, #introClock.clock .colon {
+	top: 15%;
+	height: 55%;
+	font-size: 7vmin;
+	text-align: center;
+	font-family: 'Quicksand', sans-serif;	
+}
+
+#introClock.clock .countdownLabels {
+	font-size: 1.5vmin;
+	font-weight: bold;
+	text-align: center;
+	font-family: 'Quicksand', sans-serif;
 }

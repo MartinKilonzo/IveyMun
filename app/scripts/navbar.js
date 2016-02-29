@@ -60,9 +60,13 @@ var changeSlide;
 	var busy = false;
 	var currentSlide = -1;
 	var imagesIntervalId;
+	var introTimerId;
+	introTimerId = setInterval( function() {countdown(true); }, 200);
 
 	changeSlide = function (index) {
 		if (busy || (index < -1) || (index === window.glob.slides.length)) { return; }
+		if (currentSlide === -1) { introTimerId = setInterval( function() {countdown(true); }, 200); }
+		else { clearInterval(introTimerId); }
 
 			//Pause video if it exists on the current page
 			var video = $('#slideWrapper'+currentSlide).find('video.slideBg').get(0);

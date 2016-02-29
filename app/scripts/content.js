@@ -212,14 +212,25 @@ var nextSlide, showDescription, countdown;
 	};
 
 	var timerIntervalId;
+	var formattedTime;
 	var conferenceDate = new Date("March 12, 2016, 9:00 am");
-	countdown = function () {
-		var formattedTime = formatTime(conferenceDate - new Date());
-		$('#when.conferenceDetails .countdown').remove();
-		$('#when.conferenceDetails #days').append('<span class="countdown">'+formattedTime.days+'</span>');
-		$('#when.conferenceDetails #hours').append('<span class="countdown">'+formattedTime.hours+'</span>');
-		$('#when.conferenceDetails #minutes').append('<span class="countdown">'+formattedTime.minutes+'</span>');
-		$('#when.conferenceDetails #seconds').append('<span class="countdown">'+formattedTime.seconds+'</span>');
+	countdown = function (introTimer) {
+		if (introTimer) {
+			formattedTime = formatTime(conferenceDate - new Date());
+			$('#introClock.clock .countdown').remove();
+			$('#introClock.clock #days').append('<span class="countdown">'+formattedTime.days+'</span>');
+			$('#introClock.clock #hours').append('<span class="countdown">'+formattedTime.hours+'</span>');
+			$('#introClock.clock #minutes').append('<span class="countdown">'+formattedTime.minutes+'</span>');
+			$('#introClock.clock #seconds').append('<span class="countdown">'+formattedTime.seconds+'</span>');
+		}
+		if (!introTimer) {
+			formattedTime = formatTime(conferenceDate - new Date());
+			$('#when.conferenceDetails .countdown').remove();
+			$('#when.conferenceDetails #days').append('<span class="countdown">'+formattedTime.days+'</span>');
+			$('#when.conferenceDetails #hours').append('<span class="countdown">'+formattedTime.hours+'</span>');
+			$('#when.conferenceDetails #minutes').append('<span class="countdown">'+formattedTime.minutes+'</span>');
+			$('#when.conferenceDetails #seconds').append('<span class="countdown">'+formattedTime.seconds+'</span>');
+		}
 	};
 
 	var div;
@@ -262,7 +273,7 @@ var nextSlide, showDescription, countdown;
 		var thisID = '#'+$(this).attr('id');
 		div = $(thisID+'.conferenceDetails');
 		// If it is the "When" view, start the countdown clock
-		if (thisID === '#when') { timerIntervalId = setInterval(function() { countdown(); }, 500); }
+		if (thisID === '#when') { timerIntervalId = setInterval(function() { countdown(false); }, 500); }
 		//Insert the popup background	
 		var popupWrapper = $(div).siblings('.popupWrapper');
 		var content = $(div).children('i, h3, p');

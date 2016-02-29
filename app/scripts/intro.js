@@ -43,15 +43,17 @@
 		if (!window.glob.navIsOpen) {
 			introTimeline.add(
 				TweenMax.to(nav, 0.5, {
-					width: '10%',
+					width: '5%',
 					maxWidth: '300px',
 					paddingLeft: '0',
-					force3D: true
+					force3D: true,
+					ease: Back.easeOut.config(0.5)
 				}).eventCallback('onComplete', function() {
 					resumeScroll();
+					introTimeline.reverse();
 				}));
 		}
-	}, 7000);
+	}, 10000);
 	
 
 	// introTimeline.add(
