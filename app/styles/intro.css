@@ -28,6 +28,7 @@
 	/*background-color: rgba(255,255,255,0.15);*/
 
 	filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.25));
+	-webkit-filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.25));
 }
 
 /* Animations for the Intro Scene */
@@ -168,6 +169,7 @@
 	text-align: center;
 	font-family: 'Quicksand', sans-serif;
 	filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.5));
+	-webkit-filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.5));
 }
 
 #introClock.clock .countdownLabels {
@@ -176,4 +178,5 @@
 	text-align: center;
 	font-family: 'Quicksand', sans-serif;
 	filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.5));
+	-webkit-filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.5));
 }
