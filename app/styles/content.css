@@ -292,6 +292,13 @@ video.slideBg {
 	font-size: 1.4em;
 }
 
+/*.conferenceDetails p b {
+	color: #00a896;
+}*/
+#who.conferenceDetails li {
+	font-size: 1.5em;
+}
+
 #how.conferenceDetails p {
 	opacity: 0;
 	font-size: 0.80em;
