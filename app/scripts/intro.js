@@ -6,7 +6,7 @@
 
 	var nav = $('.nav');
 	var introTimeline = new TimelineMax();
-	TweenMax.to('#Dark_Logo_bg', 2, {
+	TweenMax.to('#Dark_Logo_bg', 1, {
 			delay: 5,
 			height: '75vh',
 			ease: Linear.easeIn

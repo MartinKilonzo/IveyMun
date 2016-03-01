@@ -113,11 +113,27 @@
 #introClock {
 	opacity: 0;
 	animation-name: fillTimer;
-	animation-delay: 7s;
-	animation-duration: 2s;
+	animation-delay: 5s;
+	animation-duration: 1s;
 	animation-fill-mode: forwards;
 	animation-iteration-count: 1; 
 	animation-timing-function: linear;
+
+	opacity: 0;
+	-moz-animation-name: fillTimer;
+	-moz-animation-delay: 5s;
+	-moz-animation-duration: 1s;
+	-moz-animation-fill-mode: forwards;
+	-moz-animation-iteration-count: 1; 
+	-moz-animation-timing-function: linear;
+
+	opacity: 0;
+	-webkit-animation-name: fillTimer;
+	-webkit-animation-delay: 5s;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-fill-mode: forwards;
+	-webkit-animation-iteration-count: 1; 
+	-webkit-animation-timing-function: linear;
 
 	position: relative;
 	top: -5%;
