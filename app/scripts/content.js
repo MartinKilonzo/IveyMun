@@ -74,6 +74,8 @@ var nextSlide, showDescription, countdown;
 		}
 	};
 
+	bindScroll(true);
+
 	var slideImg = -1;
 	var delay = 2;
 	var duration = 1;

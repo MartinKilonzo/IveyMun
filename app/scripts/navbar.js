@@ -50,13 +50,6 @@ var changeSlide;
 			}
 		});
 
-		// $('a.nav-button').on('click', function(event) {
-		// 	console.debug(event.data.value);
-		// 	event.preventDefault();
-		// 	$('a.nav-button').removeClass('active');
-		// 	$(this).addClass('active');
-		// });
-
 	var busy = false;
 	window.glob.currentSlide = -1;
 	var imagesIntervalId;
@@ -143,39 +136,4 @@ var changeSlide;
 
 		else { /* do nothing */ }
 	};
-
-	//Firefox
-	$('#content').on('DOMMouseScroll', function(event){
-		if(event.originalEvent.detail > 0) {
-			//scroll down
-			changeSlide(window.glob.currentSlide + 1);
-		}
-		else {
-			//scroll up
-			changeSlide(window.glob.currentSlide - 1);
-		}
-
-		//allow page fom scrolling
-		event.stopPropagation();
-	});
-
-	//IE, Opera, Safari
-	$('body').on('mousewheel', function(event){
-		//scroll down
-		if(event.originalEvent.wheelDelta < 0) { changeSlide(window.glob.currentSlide + 1); }
-		//scroll up
-		else { changeSlide(window.glob.currentSlide - 1); }
-
-		//allow page fom scrolling
-		event.stopPropagation();
-	});
-
-	$(document).on('keydown', function(event) {
-		/* Act on the event */
-		// On down-arrow or right-arrow
-		if (event.which === 40 || event.which === 39) { changeSlide(window.glob.currentSlide + 1); }
-		// On up-arrow or left-arrow
-		else if (event.which === 38 || event.which === 37) { changeSlide(window.glob.currentSlide - 1); }
-		event.preventDefault();
-	});
 }());

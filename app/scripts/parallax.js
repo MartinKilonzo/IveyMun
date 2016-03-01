@@ -2,7 +2,7 @@
 (function () {
 'use strict';
 
-	console.log('Parallax Online');
+	console.info('Parallax Online');
 
 	$('.section .DLWrapper .primerDL').hover(function() {
 		/* Stuff to do when the mouse enters the element */
