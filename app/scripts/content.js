@@ -1,4 +1,4 @@
-/*global TweenMax ScrollMagic*/
+/*global TweenMax TimelineMax Power2 changeSlide*/
 var nextSlide, showDescription, countdown;
 (function () {
 	'use strict';
@@ -11,17 +11,17 @@ var nextSlide, showDescription, countdown;
 	$('#parallax').load('partials/parallax.html');
 
 	var content = [];
-	var numBgs = [1,4,1,0,0];
+	var numBgs = [1, 4, 1, 0, 0];
 
 	window.glob.slides.each(function (index, slide) {
 		var bgWrapper = $(slide).find('.bgWrapper');
 		content[index] = [];
 		for (var bg = 0; bg < numBgs[index]; bg++) {
 			//Load the image
-			content[index][bg] = '/images/slidebgs/slide'+index+'bg'+bg+'.jpg';
+			content[index][bg] = '/images/slidebgs/slide' + index + 'bg' + bg + '.jpg';
 			// Add the image div
 			$('<div class="slideBg"></div>').css({
-				background: 'url('+content[index][bg]+')',
+				background: 'url(' + content[index][bg] + ')',
 				backgroundSize: 'cover',
 				backgroundRepeat: 'no-repeat',
 				backgroundPosition: 'center, center'
@@ -35,11 +35,11 @@ var nextSlide, showDescription, countdown;
 			$('#content').on('DOMMouseScroll', function(event){
 				if(event.originalEvent.detail > 0) {
 				//scroll down
-				changeSlide(currentSlide + 1);
+				changeSlide(window.glob.currentSlide + 1);
 				}
 				else {
 					//scroll up
-					changeSlide(currentSlide - 1);
+					changeSlide(window.glob.currentSlide - 1);
 				}
 
 				//allow page fom scrolling
@@ -49,9 +49,9 @@ var nextSlide, showDescription, countdown;
 			//IE, Opera, Safari
 			$('body').on('mousewheel', function(event){
 				//scroll down
-				if(event.originalEvent.wheelDelta < 0) { changeSlide(currentSlide + 1); }
+				if(event.originalEvent.wheelDelta < 0) { changeSlide(window.glob.currentSlide + 1); }
 				//scroll up
-				else { changeSlide(currentSlide - 1); }
+				else { changeSlide(window.glob.currentSlide - 1); }
 
 				//allow page fom scrolling
 				event.stopPropagation();
@@ -60,9 +60,9 @@ var nextSlide, showDescription, countdown;
 			$(document).on('keydown', function(event) {
 				/* Act on the event */
 				// On down-arrow or right-arrow
-				if (event.which === 40 || event.which === 39) { changeSlide(currentSlide + 1); }
+				if (event.which === 40 || event.which === 39) { changeSlide(window.glob.currentSlide + 1); }
 				// On up-arrow or left-arrow
-				else if (event.which === 38 || event.which === 37) { changeSlide(currentSlide - 1); }
+				else if (event.which === 38 || event.which === 37) { changeSlide(window.glob.currentSlide - 1); }
 				event.preventDefault();
 			});
 		}
@@ -83,7 +83,7 @@ var nextSlide, showDescription, countdown;
 		if (currentSlide > -1 && $(slide).find('.slideBg').length > 1) {
 
 			var bgSlides = $(slide).find('.slideBg');
-			
+
 			if (slideImg < 0 ) { slideImg = bgSlides.length - 1; }
 
 			TweenMax
@@ -108,25 +108,24 @@ var nextSlide, showDescription, countdown;
 
 	// COMMITTEE CONTENT BUTTON (IE LEARN MORE, SHOW DESCRIPTION) FUNCTIONALITY //
 
-	$('.committeeContent').hover(function(event) {
-		event.preventDefault();
+	$('.committeeContent').hover(function() {
 		/* Act on the event */
 		TweenMax.to(this, 0.25, {
 			backgroundColor: 'rgba(255,255,255,0.3)'
 		});
 		// TODO: STOP BG SLIDE SHOW, BLUR BG
-	}, function (event) {
+	}, function () {
 		TweenMax.to(this, 0.25, {
 			backgroundColor: 'rgba(255,255,255,0.15)'
 		});
 		// TODO: RESUME BG SLIDE SHOW, UNBLUR BG
 	});
 
-	$('.committeeContent').on('click',function(event) {
+	$('.committeeContent').on('click', function(event) {
 		event.preventDefault();
 		/* Act on the event */
 		var id = $(this).parent().parent().parent().attr('id');
-		id = id.charAt(id.length-1);
+		id = id.charAt(id.length - 1);
 		showDescription(id);
 	});
 
@@ -137,7 +136,7 @@ var nextSlide, showDescription, countdown;
 			filter: 'drop-shadow(1px 1px 5px rgba(255,255,255,1)',
 			'-webkit-filter': 'drop-shadow(1px 1px 5px rgba(255,255,255,1))'
 		});
-	},function(event) {
+	}, function(event) {
 		event.preventDefault();
 		/* Act on the event */
 		TweenMax.to(this, 0.5, {
@@ -146,36 +145,34 @@ var nextSlide, showDescription, countdown;
 		});
 	});
 
-	$('.slide-title').on('click',function(event) {
+	$('.slide-title').on('click', function(event) {
 		event.preventDefault();
 		/* Act on the event */
 		var id = $(this).parent().parent().attr('id');
-		id = id.charAt(id.length-1);
+		id = id.charAt(id.length - 1);
 		showDescription(id);
 	});
 
 	showDescription = function (page) {
 		//unlock the vertical scolling
 		//unbind the vertical scrolling
-		
 		bindScroll(false);
 		$('body').css('overflow-y', 'visible');
 
 		//Determine the destination of the scroll
-		var position = $('.parallaxWrapper').find('#parallax'+page).offset().top;
+		var position = $('.parallaxWrapper').find('#parallax' + page).offset().top;
 
 		//pan down
 		TweenMax.to(window, 1.5, {
 			scrollTo: {y: position},
 			ease: Power2.easeout
-		});		
+		});
 		//REMEMBER: ON PAGE CHANGE RELOCK AND BIND VERTICAL SCROLLING
 	};
 
 	// CONFERENCE CONTENT FUNCTIONALITY //
 
-	$('.conferenceContent').hover(function(event) {
-		event.preventDefault();
+	$('.conferenceContent').hover(function() {
 		/* Act on the event */
 		TweenMax.to(this, 0.25, {
 			backgroundColor: 'rgba(255,255,255,0.3)'
@@ -185,8 +182,8 @@ var nextSlide, showDescription, countdown;
 			$(this).children('h2').prepend('<i class="fa fa-angle-right"></i> ');
 			$(this).children('h2').append(' <i class="fa fa-angle-left"></i>');
 		}
-		
-	}, function (event) {
+
+	}, function () {
 		if (this.id !== 'how') { $(this).children('h2').find('i').remove(); }
 		TweenMax.to(this, 0.25, {
 			backgroundColor: 'transparent'
@@ -212,28 +209,29 @@ var nextSlide, showDescription, countdown;
 	};
 
 	var timerIntervalId;
-	var formattedTime;
-	var conferenceDate = new Date("March 12, 2016, 9:00 am");
 	countdown = function (introTimer) {
+		var conferenceDate = new Date('March 12, 2016, 9:00 am');
+		var formattedTime;
 		if (introTimer) {
 			formattedTime = formatTime(conferenceDate - new Date());
 			$('#introClock.clock .countdown').remove();
-			$('#introClock.clock #days').append('<span class="countdown">'+formattedTime.days+'</span>');
-			$('#introClock.clock #hours').append('<span class="countdown">'+formattedTime.hours+'</span>');
-			$('#introClock.clock #minutes').append('<span class="countdown">'+formattedTime.minutes+'</span>');
-			$('#introClock.clock #seconds').append('<span class="countdown">'+formattedTime.seconds+'</span>');
+			$('#introClock.clock #days').append('<span class="countdown">' + formattedTime.days + '</span>');
+			$('#introClock.clock #hours').append('<span class="countdown">' + formattedTime.hours + '</span>');
+			$('#introClock.clock #minutes').append('<span class="countdown">' + formattedTime.minutes + '</span>');
+			$('#introClock.clock #seconds').append('<span class="countdown">' + formattedTime.seconds + '</span>');
 		}
 		if (!introTimer) {
 			formattedTime = formatTime(conferenceDate - new Date());
 			$('#when.conferenceDetails .countdown').remove();
-			$('#when.conferenceDetails #days').append('<span class="countdown">'+formattedTime.days+'</span>');
-			$('#when.conferenceDetails #hours').append('<span class="countdown">'+formattedTime.hours+'</span>');
-			$('#when.conferenceDetails #minutes').append('<span class="countdown">'+formattedTime.minutes+'</span>');
-			$('#when.conferenceDetails #seconds').append('<span class="countdown">'+formattedTime.seconds+'</span>');
+			$('#when.conferenceDetails #days').append('<span class="countdown">' + formattedTime.days + '</span>');
+			$('#when.conferenceDetails #hours').append('<span class="countdown">' + formattedTime.hours + '</span>');
+			$('#when.conferenceDetails #minutes').append('<span class="countdown">' + formattedTime.minutes + '</span>');
+			$('#when.conferenceDetails #seconds').append('<span class="countdown">' + formattedTime.seconds + '</span>');
 		}
 	};
 
 	var div;
+	var divOpening = false;
 	//define global divOpen
 	window.glob.divOpen = false;
 	var conferenceContentTimeline = new TimelineMax();
@@ -241,7 +239,7 @@ var nextSlide, showDescription, countdown;
 	var closeDiv = function(event) {
 		event.preventDefault();
 		/* Act on the event */
-		if (window.glob.divOpen) { 
+		if (window.glob.divOpen) {
 			conferenceContentTimeline.reverse()
 			.eventCallback('onReverseComplete', function () {
 				if(timerIntervalId) {
@@ -259,7 +257,6 @@ var nextSlide, showDescription, countdown;
 		}
 	};
 
-	var divOpening = false;
 	$('.conferenceContent').on('click', function (event) {
 		event.preventDefault();
 		if (divOpening) { return; }
@@ -270,13 +267,13 @@ var nextSlide, showDescription, countdown;
 		//Reset the timeline
 		conferenceContentTimeline = new TimelineMax();
 		//Assign div and content for animation; store the div for closing
-		var thisID = '#'+$(this).attr('id');
-		div = $(thisID+'.conferenceDetails');
+		var thisID = '#' + $(this).attr('id');
+		div = $(thisID + '.conferenceDetails');
 		// If it is the "When" view, start the countdown clock
 		if (thisID === '#when') { timerIntervalId = setInterval(function() { countdown(false); }, 500); }
-		//Insert the popup background	
+		//Insert the popup background
 		var popupWrapper = $(div).siblings('.popupWrapper');
-		var content = $(div).children('i, h3, p');
+		var contents = $(div).children('i, h3, p');
 		//Define animations
 		var popupWrapperTween = TweenMax.to(popupWrapper, 0.25, {
 			display: 'block',
@@ -296,7 +293,7 @@ var nextSlide, showDescription, countdown;
 			$('.popupWrapper').on('click', div, closeDiv);
 			$('.conferenceDetails i.close').on('click', div, closeDiv);
 		});
-		var contentween = TweenMax.to(content, 0.33, {
+		var contentween = TweenMax.to(contents, 0.33, {
 				opacity: 1
 		});
 		//Add animations to timeline

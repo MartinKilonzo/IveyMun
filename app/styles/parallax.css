@@ -56,14 +56,12 @@
 }
 
 
-.parallaxWrapper .section-content {
+.parallaxWrapper .section-content, .DLWrapper {
 	position: relative;
 	height: auto;
 	width: 100%;
-
 	padding-left: 10vw;
 	padding-right: 10vw;
-
 	font-size: 16pt;
 }
 
@@ -83,7 +81,30 @@
 	left: 50%;
 	margin-right: -50%;
 	transform: translate(-50%, 0%);
+	-webkit-transform: translate(-50%, 0%);
+	-ms-transform: translate(-50%, 0%);
 	height: 100px;
+}
+
+.section .DLWrapper {
+	position: relative;
+	top: 40px;
+	height: auto;
+	width: 100vw;
+}
+
+.section .primerDL {
+	position: relative;
+	padding: 10px 30px 10px 30px;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+	color: black;
+	font-family: 'Quicksand', sans-serif;
+}
+
+.section .primerDL:hover {
+	text-decoration: none;
 }
 
 #parallax6 {
