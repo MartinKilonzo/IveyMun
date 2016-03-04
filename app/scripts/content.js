@@ -213,17 +213,23 @@ var nextSlide, showDescription, countdown;
 	var timerIntervalId;
 	countdown = function (introTimer) {
 		var conferenceDate = new Date('March 12, 2016, 9:00 am');
-		var formattedTime;
-		if (introTimer) {
-			formattedTime = formatTime(conferenceDate - new Date());
+		var formattedTime = formatTime(conferenceDate - new Date());
+
+		// If the confernce has already started, the timer is unnecessary
+		if (conferenceDate - new Date() < 0) {
+			$('.colon').remove();
+			$('.countdownLabels').remove();
+			$('#when.conferenceDetails h4').css('top', '50%');
+		}
+
+		else if (introTimer) {
 			$('#introClock.clock .countdown').remove();
 			$('#introClock.clock #days').append('<span class="countdown">' + formattedTime.days + '</span>');
 			$('#introClock.clock #hours').append('<span class="countdown">' + formattedTime.hours + '</span>');
 			$('#introClock.clock #minutes').append('<span class="countdown">' + formattedTime.minutes + '</span>');
 			$('#introClock.clock #seconds').append('<span class="countdown">' + formattedTime.seconds + '</span>');
 		}
-		if (!introTimer) {
-			formattedTime = formatTime(conferenceDate - new Date());
+		else if (!introTimer) {
 			$('#when.conferenceDetails .countdown').remove();
 			$('#when.conferenceDetails #days').append('<span class="countdown">' + formattedTime.days + '</span>');
 			$('#when.conferenceDetails #hours').append('<span class="countdown">' + formattedTime.hours + '</span>');

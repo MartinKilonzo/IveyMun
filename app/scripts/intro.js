@@ -6,11 +6,13 @@
 
 	var nav = $('.nav');
 	var introTimeline = new TimelineMax();
-	TweenMax.to('#Dark_Logo_bg', 1, {
+	if (new Date('March 12, 2016, 9:00 am') - new Date() > 0) {
+		TweenMax.to('#Dark_Logo_bg', 1, {
 			delay: 5,
 			height: '75vh',
 			ease: Linear.easeIn
-	});
+		});
+	}
 	setTimeout(function () {
 		if (!window.glob.navIsOpen && window.glob.currentSlide === -1) {
 			introTimeline.add(
