@@ -426,3 +426,25 @@ video.slideBg {
 /*	filter: drop-shadow(01px 1px 5px rgba(255,255,255,0);
 	-webkit-filter: drop-shadow(1px 1px 5px rgba(255,255,255,0));*/
 }
+
+.redacted {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	color: #ca0000;
+	background-color: rgba(0,0,0,0.5);
+}
+
+.redacted h1 {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%) rotate(-25deg);
+	-webkit-transform: translate(-50%,-50%) rotate(-25deg);
+	-ms-transform: translate(-50%,-50%) rotate(-25deg);
+	cursor: default;
+	font-family: 'Cutive Mono';
+	font-size: 15vmin;
+	font-weight: bold;
+	text-transform: uppercase;
+}

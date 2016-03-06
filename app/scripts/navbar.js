@@ -81,7 +81,7 @@ var changeSlide;
 			busy = true;
 			slide = $('#slideWrapper' + index);
 			var bgWrapper = $(slide).find('.bgWrapper');
-			var contentWrapper = $(slide).find('.contentWrapper');
+			var contentWrapper = $(slide).find('.contentWrapper, .redacted');
 			var topbar = $(slide).find('.slide-topbar');
 
 			// Slide the window.glob.currentSlide slide up
