@@ -5,13 +5,20 @@ var changeSlide;
 
 		console.info('Navbar Loaded');
 		var navTimeLine = new TimelineMax();
+		// Initialize global variables
 		window.glob.slides.length = window.glob.slides.length || 7;
 		window.glob.navIsOpen = false;
 
+		/**
+		 *	JQuery nav hover function. When the mouse hovers over the nav, expand it.
+		 * 	When the mouse leaves, hide it.
+		 */
 		$('.nav').hover(function() {
+			// Check to see if the nav is open
 			if (!window.glob.navIsOpen && !window.glob.divOpen) {
 				var labels = $(this).find('.nav-label');
 				var labelBars = $(this).find('.label-bar');
+				// Open the nav
 				navTimeLine.add(
 					TweenMax.to(this, 0.5, {
 						width: '25%',
@@ -30,12 +37,13 @@ var changeSlide;
 						window.glob.navIsOpen = true;
 					}));
 			}
-
 		}, function() {
+			// Check to see if the nav is indeed open before attempting to close it
 			if (window.glob.navIsOpen) {
 				var nav = this;
 				var labels = $(this).find('.nav-label');
 				var labelBars = $(this).find('.label-bar');
+				// Close the nav
 				navTimeLine.add(TweenMax.to([labels, labelBars], 0.2, {
 					opacity: 0
 				}).eventCallback('onComplete', function() {
@@ -56,9 +64,17 @@ var changeSlide;
 	var introTimerId;
 	introTimerId = setInterval( function() {countdown(true); }, 200);
 
+	/**
+	 *	Change Slide function. Changes the "slide" (page) to the desired page as indicated by index.
+	 *
+	 *	@index 		- The index of the slide to change to
+	 */	
 	changeSlide = function (index) {
+		// Check that the function is not currently running, that the index is valid, and that it is pointing to a new slide before proceeding
 		if (busy || (index < -1) || (index === window.glob.slides.length)) { return; }
+		// If the next slide is the title page (-1), resume the countdown
 		if (window.glob.currentSlide === -1) { introTimerId = setInterval( function() {countdown(true); }, 200); }
+		// Otherwise, clear the countdown to save on resources
 		else { clearInterval(introTimerId); }
 
 		//Pause video if it exists on the current page
@@ -71,6 +87,7 @@ var changeSlide;
 		if (video && video.paused) { video.play(); }
 
 		var slide;
+		// If the next slide is "on top of" the current slide, animate it up then move the previous slides up behind it
 		if (index > window.glob.currentSlide) {
 
 			// Update the navbar to show the current page
@@ -106,7 +123,7 @@ var changeSlide;
 				busy = false;
 			});
 		}
-
+		// If the next slide is "below" the current slide, move the slides between it and the desired slide down, then animate it down.
 		else if (index < window.glob.currentSlide) {
 
 			// Update the navbar to show the current page

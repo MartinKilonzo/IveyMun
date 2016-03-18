@@ -6,6 +6,7 @@
 
 	var nav = $('.nav');
 	var introTimeline = new TimelineMax();
+	// Display the countdown if the date is before the confernce date
 	if (new Date('March 12, 2016, 9:00 am') - new Date() > 0) {
 		TweenMax.to('#Dark_Logo_bg', 1, {
 			delay: 5,

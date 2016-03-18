@@ -11,13 +11,14 @@ $(function() {
 	document.body.addEventListener('touchstart', function(e){ e.preventDefault(); });
 
 	console.info('Pages Loaded');
-
 	console.info('TweenMax (GSAP) Version:', TweenMax.version);
 	console.info('TimelineMax (GSAP) Version:', TimelineMax.version);
 	console.info('ScrollMagic Version:', ScrollMagic.version);
 	console.info('ScrollMagic (GSAP) Version:', ScrollMagic.version);
+
 	//Create window-wide "global" variable
 	window.glob = {};
+	// If the brower is Safari, warn the user that it is not supported
 	if (isSafari) {
 		$('html').prepend('<div class="browserWarning"><h1>This Page Is Best Viewed in:<br>Chrome</h1></div>');
 

@@ -13,6 +13,13 @@ var nextSlide, showDescription, countdown;
 	var content = [];
 	var numBgs = [1, 4, 1, 0, 0];
 
+	// Initialize each slide with the specified number of backgrounds in numBgs.
+	/**
+	 *	Slide background initialization function. Loads each slide with the specified number of backgrounds as specified by its index in numBgs.
+	 *
+	 *	@index 		- The index of the slide where the backgrounds are to be loaded (defined by slides.each)
+	 * 	@slide 		- The slide object (defined by slides.each)
+	 */
 	window.glob.slides.each(function (index, slide) {
 		var bgWrapper = $(slide).find('.bgWrapper');
 		content[index] = [];
@@ -29,9 +36,14 @@ var nextSlide, showDescription, countdown;
 		}
 	});
 
+	/**
+	 *	Bind scroll function. Toggles the binding of the changeSlide function to scroll wheel actions (up, down, left and right) and arrow keys (up and down).
+	 *
+	 * 	@state 		- The desired state of the bind ("truthy" = on)
+	 */
 	var bindScroll = function (state) {
 		if (state) {
-			//Firefox
+			//Firefox Mousewheel
 			$('#content').on('DOMMouseScroll', function(event){
 				if(event.originalEvent.detail > 0) {
 				//scroll down
@@ -46,7 +58,7 @@ var nextSlide, showDescription, countdown;
 				event.stopPropagation();
 			});
 
-			//IE, Opera, Safari
+			//IE, Opera, Safari Mousewheel
 			$('body').on('mousewheel', function(event){
 				//scroll down
 				if(event.originalEvent.wheelDelta < 0) { changeSlide(window.glob.currentSlide + 1); }
@@ -57,6 +69,7 @@ var nextSlide, showDescription, countdown;
 				event.stopPropagation();
 			});
 
+			// Arrow keys
 			$(document).on('keydown', function(event) {
 				/* Act on the event */
 				// On down-arrow or right-arrow
@@ -74,12 +87,18 @@ var nextSlide, showDescription, countdown;
 		}
 	};
 
+	// Initializes the site with binded scrolling behviour
 	bindScroll(true);
 
 	var slideImg = -1;
 	var delay = 2;
 	var duration = 1;
 
+	/**
+	 *	Next slide funcition. Function which fades through the background images of a slide.
+	 *
+	 *	@currentSlide 		- The index of the current slide
+	 */
 	nextSlide = function (currentSlide) {
 		var slide = $(window.glob.slides.get(currentSlide));
 		if (currentSlide > -1 && $(slide).find('.slideBg').length > 1) {
@@ -106,10 +125,13 @@ var nextSlide, showDescription, countdown;
 		}
 	};
 
-	//GOTO Description functionality
+	//Description functionality
 
 	// COMMITTEE CONTENT BUTTON (IE LEARN MORE, SHOW DESCRIPTION) FUNCTIONALITY //
 
+	/**
+	 *	JQuery hover function for buttons on slides. Toggles the background opacity on mouseenter/mouseleave.
+	 */
 	$('.committeeContent').hover(function() {
 		/* Act on the event */
 		TweenMax.to(this, 0.25, {
@@ -123,6 +145,11 @@ var nextSlide, showDescription, countdown;
 		// TODO: RESUME BG SLIDE SHOW, UNBLUR BG
 	});
 
+	/**
+	 *	JQuery click function for buttons on slides. Takes the user to the appropriate page where the description of the committee can be found.
+	 *
+	 *	@event 		- The click event
+	 */
 	$('.committeeContent').on('click', function(event) {
 		event.preventDefault();
 		/* Act on the event */
@@ -131,7 +158,10 @@ var nextSlide, showDescription, countdown;
 		showDescription(id);
 	});
 
-	$('.slide-title').hover(function (event) {
+	/**
+	 *	JQuery hover function for title images buttons on slides. Toggles the dropshadow on mouseenter/mouseleave.
+	 */
+	$('.slide-title').hover(function () {
 		event.preventDefault();
 		/* Act on the event */
 		TweenMax.to(this, 0.5, {
@@ -147,6 +177,11 @@ var nextSlide, showDescription, countdown;
 		});
 	});
 
+	/**
+	 *	JQuery click function title images buttons on slides. Takes the user to the appropriate page where the description of the committee can be found.
+	 *
+	 *	@event 		- The click event
+	 */
 	$('.slide-title').on('click', function(event) {
 		event.preventDefault();
 		/* Act on the event */
@@ -155,6 +190,11 @@ var nextSlide, showDescription, countdown;
 		showDescription(id);
 	});
 
+	/**
+	 *	Show description function. Scrolls the page to the y-value of the target pages's description.
+	 *
+	 *	@page 		- The page to go to (usually the slide number)
+	 */
 	showDescription = function (page) {
 		//unlock the vertical scolling
 		//unbind the vertical scrolling
@@ -173,7 +213,9 @@ var nextSlide, showDescription, countdown;
 	};
 
 	// CONFERENCE CONTENT FUNCTIONALITY //
-
+	/**
+	 *	JQuery hover function for the conference page's content. Toggles the background opacity on mouseenter/mouseleave, and appends/prepends "<"/">" respectively for emphasis.
+	 */
 	$('.conferenceContent').hover(function() {
 		/* Act on the event */
 		TweenMax.to(this, 0.25, {
@@ -193,6 +235,16 @@ var nextSlide, showDescription, countdown;
 		});
 	});
 
+	/**
+	 *	Format Time function. Helper function which converts unix time into a formatted time object, which it returns. 
+	 *
+	 *	@time 					- The unix time to be formatted
+	 	@return formattedTime	- The time, formatted 
+	 			.Seconds 		- The seconds portion of the unix time
+	 			.minutes 		- The minutes portion of the unix time
+	 			.hours 			- The hours portion of the unix time
+	 			.days 			- The days portion of the unix time
+	 */
 	var formatTime = function (time) {
 		var formattedTime = {};
 		time = (time / 1000) | 0;
@@ -210,6 +262,11 @@ var nextSlide, showDescription, countdown;
 		return formattedTime;
 	};
 
+	/**
+	 *	Countdown function. Creates a countdown from now to the next conference date which it embeds into the HTML structure.
+	 *
+	 *	@introTimer 		- The locatino of the timer (true = intro, false = confernce details)
+	 */
 	var timerIntervalId;
 	countdown = function (introTimer) {
 		var conferenceDate = new Date('March 12, 2016, 9:00 am');
@@ -238,12 +295,14 @@ var nextSlide, showDescription, countdown;
 		}
 	};
 
+	/**
+	 *	Close Div function. Helper function which closes the popup that opens when a conferenceContent button is clicked.
+	 */
 	var div;
 	var divOpening = false;
 	//define global divOpen
 	window.glob.divOpen = false;
 	var conferenceContentTimeline = new TimelineMax();
-
 	var closeDiv = function(event) {
 		event.preventDefault();
 		/* Act on the event */
@@ -265,6 +324,11 @@ var nextSlide, showDescription, countdown;
 		}
 	};
 
+	/**
+	 *	JQuery click function for conferenceContent buttons. When clicked, they expand their respective divs to create popups with more information.
+	 *
+	 *	@event 		- The event object
+	 */
 	$('.conferenceContent').on('click', function (event) {
 		event.preventDefault();
 		if (divOpening) { return; }
